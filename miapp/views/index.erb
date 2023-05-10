@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+ <html>
+   <head>
+     <title> ADT </title>
+     <style>
+       form {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         height: 100vh;
+       }
+     </style>
+   </head>
+   <body>
+     <h1> Argentina's Dream TEAM </h1>
+     <p>Inserte su nombre y clave para ingresar o crear su usuario</p>
+     <form action="/users" method="POST">
+       <input type="text" name="name" placeholder="Nombre">
+       <input type="password" name="pass" placeholder="Contraseña">
+       <button>Register</button>
+     </form>
+   </body>
+ </html>
