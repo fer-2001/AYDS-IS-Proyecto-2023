@@ -10,9 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema[7.0].define(version: 2023_05_11_141350) do
-=======
 ActiveRecord::Schema[7.0].define(version: 2023_05_11_142344) do
   create_table "progress", force: :cascade do |t|
     t.integer "totalRespuestaCorrecta"
@@ -23,7 +20,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_142344) do
     t.datetime "updated_at", null: false
   end
 
->>>>>>> RamaCU
   create_table "questions", force: :cascade do |t|
     t.string "pregunta"
     t.integer "identificador"
