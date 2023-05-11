@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_11_135421) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_142344) do
+  create_table "progress", force: :cascade do |t|
+    t.integer "totalRespuestaCorrecta"
+    t.integer "totalRespuestaIncorrecta"
+    t.integer "puntosPerdidos"
+    t.integer "puntosTotales"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string "pregunta"
     t.integer "identificador"
