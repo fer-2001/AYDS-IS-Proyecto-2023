@@ -9,6 +9,7 @@ require 'sinatra/reloader' if Sinatra::Base.environment == :development
 require_relative 'models/user'
 require_relative 'models/report'
 require_relative 'models/question'
+require_relative 'model/progress'
 
 
 class App < Sinatra::Application
