@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_11_135421) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_141350) do
   create_table "questions", force: :cascade do |t|
     t.string "pregunta"
     t.integer "identificador"
@@ -37,6 +37,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_135421) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "pass"
+    t.integer "vidas"
+    t.integer "puntos"
+    t.integer "racha"
   end
 
 end
