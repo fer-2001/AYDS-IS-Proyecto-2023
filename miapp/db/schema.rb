@@ -10,45 +10,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_11_142344) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_232915) do
+  create_table "options", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "progress", force: :cascade do |t|
-    t.integer "totalRespuestaCorrecta"
-    t.integer "totalRespuestaIncorrecta"
-    t.integer "puntosPerdidos"
-    t.integer "puntosTotales"
+    t.integer "correctAnswers"
+    t.integer "incorrectAnswers"
+    t.integer "losePoints"
+    t.integer "points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "questions", force: :cascade do |t|
-    t.string "pregunta"
-    t.integer "identificador"
-    t.integer "dificultad"
-    t.integer "cantPuntos"
-  end
-
-  create_table "reports", force: :cascade do |t|
-    t.string "descripcion"
-    t.integer "ide"
-    t.date "fecha"
+    t.string "question"
+    t.integer "difficult"
+    t.integer "cantPoints"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "sugerencias", force: :cascade do |t|
-    t.integer "codigo_sugerencia"
-    t.string "descripcion"
-    t.date "fecha"
+  create_table "reports", force: :cascade do |t|
+    t.string "description"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "suggestions", force: :cascade do |t|
+    t.string "description"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
+    t.string "pass"
+    t.integer "lifes"
+    t.integer "points"
+    t.integer "streak"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "pass"
-    t.integer "vidas"
-    t.integer "puntos"
-    t.integer "racha"
   end
 
 end
