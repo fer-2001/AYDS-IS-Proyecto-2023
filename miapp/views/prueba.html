@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+</html><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,12 +14,14 @@
           height: 100vh;
         }
       </style>
-</head>
-<body>
-    <h1> ¿Cual es su reporte maestro? <h1>
-        <input type="text" name="reporte" placeholder="reporte">
-        <button>Send</button>
-</body>
+</head> 
+  <body>
+      <form action="/reports" method="POST">
+        <h1> ¿Cual es su reporte maestro? <h1></h1>
+        <input type="text" name="descripcion" placeholder="reporte">
+        <input type="integer" name="ide" placeholder="identificador">
+        <input type="date" name="fecha" placeholder="fecha">
+        <button>Register</button>
+     </form>
+  </body>
 </html>
-
-<!-- ! + shift + tab  me da el cuerpo basico de un html-->

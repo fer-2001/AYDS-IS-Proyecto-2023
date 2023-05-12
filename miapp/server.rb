@@ -55,6 +55,12 @@ class App < Sinatra::Application
     erb :reports
   end
 
+  post '/reports' do
+    @report = Report.find_or_create_by( descripcion: params[:descripcion],ide: params[:ide], 
+                                         fecha: params[:fecha] )
+    erb :reports
+  end
+
   post '/users' do
     @users = User.find_or_create_by(name: params[:name],pass: params[:pass])
     erb :users
