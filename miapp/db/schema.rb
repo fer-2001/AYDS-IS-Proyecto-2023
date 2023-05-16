@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_12_151858) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_16_155636) do
   create_table "options", force: :cascade do |t|
     t.string "content"
     t.datetime "created_at", null: false
@@ -65,6 +65,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_151858) do
     t.integer "streak"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users_questions", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "question_id"
+    t.index ["question_id"], name: "index_users_questions_on_question_id"
+    t.index ["user_id"], name: "index_users_questions_on_user_id"
   end
 
 end
