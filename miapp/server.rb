@@ -55,6 +55,10 @@ class App < Sinatra::Application
     erb :reports
   end
 
+  get '/register' do
+    erb :register
+  end
+
   post '/reports' do
     @report = Report.find_or_create_by( descripcion: params[:descripcion],ide: params[:ide], 
                                          fecha: params[:fecha] )
@@ -62,6 +66,11 @@ class App < Sinatra::Application
   end
 
   post '/users' do
+    @users = User.find(name: params[:name],pass: params[:pass])
+    erb :users
+  end
+
+  post '/register' do
     @users = User.find_or_create_by(name: params[:name],pass: params[:pass])
     erb :users
   end
