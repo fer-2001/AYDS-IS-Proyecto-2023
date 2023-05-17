@@ -65,5 +65,9 @@ class App < Sinatra::Application
     @users = User.find_or_create_by(name: params[:name],pass: params[:pass])
     erb :users
   end
+
+  get '/menu' do
+    erb :menu
+  end
 end
 
