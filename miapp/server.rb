@@ -19,7 +19,7 @@ class App < Sinatra::Application
 
   set :root,  File.dirname('miapp')
   set :views, Proc.new { File.join(root, 'views') }
-
+  set :public_folder, File.dirname(__FILE__) + '/views'
   configure :production, :development do
     enable :logging
 
