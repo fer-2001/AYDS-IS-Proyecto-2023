@@ -1,27 +1,29 @@
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        form {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          height: 100vh;
-        }
-      </style>
-</head> 
-  <body>
-      <form action="/reports" method="POST">
-        <h1> ¿Cual es su reporte maestro? <h1></h1>
-        <input type="text" name="descripcion" placeholder="reporte">
-        <input type="integer" name="ide" placeholder="identificador">
-        <input type="date" name="fecha" placeholder="fecha">
-        <button>Register</button>
+<!DOCTYPE html>
+ <html>
+   <head>
+    <link rel="stylesheet" href="index.css" />
+     <title> ADT </title>
+     <style>
+       form {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         height: 100vh;
+       }
+     </style>
+   </head>
+   <body>
+     <h1>Bienvenido a Argentina's Dream TEAM! </h1>
+     <form action="/users" method="POST">
+
+      <img src="logo.png" width="800"> 
+      <p>Inserte su nombre y clave para ingresar</p>
+
+       <input type="text" name="name" placeholder="Nombre">
+       <input type="password" name="pass" placeholder="Contraseña">
+       <button>Ingresar</button>
+       <p> ¿No tienes una cuenta?<a href="/register"> Registrate </a>  </p>
      </form>
-  </body>
-</html>
+   </body>
+ </html>
