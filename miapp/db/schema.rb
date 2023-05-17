@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_16_165948) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_17_204255) do
   create_table "options", force: :cascade do |t|
     t.string "content"
     t.datetime "created_at", null: false
@@ -50,6 +50,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_165948) do
   create_table "responses", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "option_id"
+    t.index ["option_id"], name: "index_responses_on_option_id", unique: true
+    t.index ["user_id"], name: "index_responses_on_user_id", unique: true
   end
 
   create_table "suggestions", force: :cascade do |t|
@@ -73,8 +77,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_165948) do
 
   create_table "users_questions", id: false, force: :cascade do |t|
     t.integer "user_id"
-    t.integer "question_id"
-    t.index ["question_id"], name: "index_users_questions_on_question_id"
+    t.integer "questions_id"
+    t.index ["questions_id"], name: "index_users_questions_on_questions_id"
     t.index ["user_id"], name: "index_users_questions_on_user_id"
   end
 
