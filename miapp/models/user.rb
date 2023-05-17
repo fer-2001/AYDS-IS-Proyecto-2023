@@ -4,4 +4,6 @@ class User < ActiveRecord::Base
     has_and_belongs_to_many :question
     has_many :suggestions
     has_many :reports
+    has_many :responses
+    has_many :options, through: :responses
 end
