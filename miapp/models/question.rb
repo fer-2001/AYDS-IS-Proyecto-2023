@@ -1,5 +1,12 @@
 class Question < ActiveRecord::Base
- has_one :option
- has_and_belongs_to_many :user
- has_many :option
-end
+    has_and_belongs_to_many :users
+    has_many :options
+  
+    validate :validate_option_count
+  
+    private
+  
+    def validate_option_count
+      errors.add(:options, "must be exactly 4") unless options.size == 4
+    end
+  end
