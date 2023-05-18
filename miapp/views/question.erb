@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-     <link rel="stylesheet" href="styles/question.css"/>
-  <title>Menú de Preguntas</title>
+  <link rel="stylesheet" href="styles/question.css"/>
 </head>
 <body>
-  <h1>Pregunta</h1>
-  <p>¿Cuál es la capital de Francia?</p>
-  
-  <ul>
-    <li><input type="radio" name="respuesta" value="paris">París</li>
-    <li><input type="radio" name="respuesta" value="londres">Londres</li>
-    <li><input type="radio" name="respuesta" value="roma">Roma</li>
-    <li><input type="radio" name="respuesta" value="madrid">Madrid</li>
-  </ul>
-  
-  <button type="submit">Enviar Respuesta</button>
+  <div class="container">
+  <% @questions.each do |question| %>
+    <h2 class="question"><%= question.question %></h2>
+    <ul class="options">
+      <% pregunta.options.each do |option| %>
+        <li class="option">
+          <input type="radio" name="<%= "option#{question.id}" %>" id="<%= "option#{option.id}" %>" class="custom-radio">
+          <label for="<%= "option#{option.id}" %>"><%= option.option %></label>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div class="btn-container">
+    <a href="#" class="btn">Enviar respuesta</a>
+  </div>
+</div>
 </body>
 </html>

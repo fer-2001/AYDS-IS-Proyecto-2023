@@ -64,10 +64,6 @@ class App < Sinatra::Application
     erb :register
   end
 
-  get '/option' do
-    erb :option
-  end
-
   post '/reports' do
     @report = Report.find_or_create_by( descripcion: params[:descripcion],ide: params[:ide],
                                          fecha: params[:fecha] )
