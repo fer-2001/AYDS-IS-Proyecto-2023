@@ -5,20 +5,77 @@
 </head>
 <body>
   <div class="container">
-  <% @questions.each do |question| %>
-    <h2 class="question"><%= question.question %></h2>
-    <ul class="options">
-      <% question.options.each do |option| %>
-        <li class="option">
-          <%= option.content %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-</div>
-  <div class="btn-container">
-    <a href="#" class="btn">Enviar respuesta</a>
+    <% @questions.each_with_index do |question, index| %>
+      <div class="question-container" id="question<%= index %>">
+        <h2 class="question"><%= "Pregunta #{index + 1}: #{question.question}" %></h2>
+        <ul class="options">
+          <% question.options.each do |option| %>
+            <li class="option">
+              <button class="option-btn" onclick="seleccionarRespuesta(<%= index %>, <%= option.id %>)">
+                <%= option.content %>
+              </button>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   </div>
-</div>
+
+  <div class="btn-container">
+    <button class="btn" id="nextButton" onclick="mostrarSiguientePregunta()">Siguiente pregunta</button>
+  </div>
+
+  <script>
+    var totalPreguntas = <%= @questions.length %>;
+    var preguntaActual = 0;
+    var respuestas = [];
+
+    function ocultarPreguntas() {
+      var preguntas = document.querySelectorAll('.question-container');
+      preguntas.forEach(function(pregunta) {
+        pregunta.style.display = 'none';
+      });
+    }
+
+    function mostrarPreguntaActual() {
+      var preguntaActualElemento = document.getElementById('question' + preguntaActual);
+      preguntaActualElemento.style.display = 'block';
+    }
+
+    function seleccionarRespuesta(preguntaIndex, opcionId) {
+      respuestas[preguntaIndex] = opcionId;
+
+      // Resaltar la opción seleccionada
+      var opciones = document.querySelectorAll('#question' + preguntaIndex + ' .option');
+      opciones.forEach(function(opcion) {
+        opcion.classList.remove('selected');
+      });
+
+      var opcionSeleccionada = document.querySelector('#question' + preguntaIndex + ' .option:nth-child(' + (opcionId + 1) + ')');
+      opcionSeleccionada.classList.add('selected');
+    }
+
+    function mostrarSiguientePregunta() {
+      // Verificar si se ha seleccionado una respuesta
+      var respuestaSeleccionada = respuestas[preguntaActual];
+      if (respuestaSeleccionada === undefined) {
+        alert('Por favor, selecciona una respuesta antes de continuar.');
+        return;
+      }
+
+      ocultarPreguntas();
+
+      if (preguntaActual < totalPreguntas - 1) {
+        preguntaActual++;
+        mostrarPreguntaActual();
+      } else {
+        // Última pregunta, puedes realizar alguna acción aquí
+        alert('Has respondido todas las preguntas.');
+      }
+    }
+
+    ocultarPreguntas();
+    mostrarPreguntaActual();
+  </script>
 </body>
 </html>
