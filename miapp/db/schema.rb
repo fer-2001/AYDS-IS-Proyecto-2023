@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_17_204255) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_18_014432) do
   create_table "options", force: :cascade do |t|
     t.string "content"
     t.datetime "created_at", null: false

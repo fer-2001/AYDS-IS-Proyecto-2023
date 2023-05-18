@@ -10,6 +10,11 @@ require_relative 'models/user'
 require_relative 'models/report'
 require_relative 'models/question'
 require_relative 'models/progress'
+require_relative 'models/suggestion'
+require_relative 'models/option'
+require_relative 'models/response'
+
+
 
 
 class App < Sinatra::Application
