@@ -85,7 +85,7 @@ class App < Sinatra::Application
   end
 
   get '/questions' do
-    @questions = questions.includes(:options).all
+    @questions = Question.includes(:options).all
     erb :question
   end
 end
