@@ -19,6 +19,7 @@ class App < Sinatra::Application
 
   set :root,  File.dirname('miapp')
   set :views, Proc.new { File.join(root, 'views') }
+  set :public_folder, File.dirname(__FILE__) + '/views'
 
   configure :production, :development do
     enable :logging
@@ -56,7 +57,7 @@ class App < Sinatra::Application
   end
 
   post '/reports' do
-    @report = Report.find_or_create_by( descripcion: params[:descripcion],ide: params[:ide], 
+    @report = Report.find_or_create_by( descripcion: params[:descripcion],ide: params[:ide],
                                          fecha: params[:fecha] )
     erb :reports
   end
@@ -64,6 +65,10 @@ class App < Sinatra::Application
   post '/users' do
     @users = User.find_or_create_by(name: params[:name],pass: params[:pass])
     erb :users
+  end
+
+  get '/options' do
+    erb :option
   end
 end
 
