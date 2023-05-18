@@ -86,6 +86,11 @@ class App < Sinatra::Application
 
   get '/menu' do
     erb :menu
-  end 
+  end
+
+  get '/questions' do
+    @questions = questions.includes(:options).all
+    erb :question
+  end
 end
 
