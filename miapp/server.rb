@@ -64,7 +64,7 @@ class App < Sinatra::Application
     erb :register
   end
 
-  get '/options' do
+  get '/option' do
     erb :option
   end
 

@@ -8,13 +8,14 @@
          display: flex;
          flex-direction: column;
          align-items: center;
+         margin-right: 50px;
          justify-content: center;
          height: 70vh;
        }
      </style>
    </head>
    <body>
-     <h1>Bienvenido a Argentina's Dream TEAM! </h1>
+     <h1>Bienvenido a Argentina's <br> Dream TEAM! </h1>
      <form action="/users" method="POST">
       <img src="image/logo.png" width="800"> 
       <p>Inserte su nombre y clave para ingresar</p>
@@ -22,7 +23,7 @@
        <input type="text" name="name" placeholder="Nombre">
        <input type="password" name="pass" placeholder="Contraseña">
        <button> <a href="/menu"> Ingresar </a> </button>
-       <p> ¿No tienes una cuenta? <a href="/register"> Registrate </a>  </p>
+       <p> <a href="/register"> Registrate </a>  </p>
      </form>
    </body>
  </html>
