@@ -14,6 +14,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_014432) do
   create_table "options", force: :cascade do |t|
     t.integer "question_id"
     t.string "content"
+    t.boolean "correct"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_options_on_question_id"

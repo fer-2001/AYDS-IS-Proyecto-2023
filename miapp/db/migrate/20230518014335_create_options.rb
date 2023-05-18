@@ -3,6 +3,7 @@ class CreateOptions < ActiveRecord::Migration[7.0]
     create_table :options do |t|
       t.belongs_to :question, unique: false
       t.string  :content
+      t.boolean :correct
       t.timestamps
     end
   end
