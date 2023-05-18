@@ -5,34 +5,20 @@
 </head>
 <body>
   <div class="container">
-    <div class="question">
-      Pregunta: ¿Cuál es tu opción favorita?
-    </div>
-
+  <% @questions.each do |question| %>
+    <h2 class="question"><%= question.question %></h2>
     <ul class="options">
-      <li class="option">
-        <input type="radio" name="option" id="option1" class="custom-radio">
-        <label for="option1">Opción 1</label>
-      </li>
-
-      <li class="option">
-        <input type="radio" name="option" id="option2" class="custom-radio">
-        <label for="option2">Opción 2</label>
-      </li>
-
-      <li class="option">
-        <input type="radio" name="option" id="option3" class="custom-radio">
-        <label for="option3">Opción 3</label>
-      </li>
-
-      <li class="option">
-        <input type="radio" name="option" id="option4" class="custom-radio">
-        <label for="option4">Opción 4</label>
-      </li>
+      <% pregunta.options.each do |option| %>
+        <li class="option">
+          <input type="radio" name="<%= "option#{question.id}" %>" id="<%= "option#{option.id}" %>" class="custom-radio">
+          <label for="<%= "option#{option.id}" %>"><%= option.option %></label>
+        </li>
+      <% end %>
     </ul>
-    <div class="btn-container">
-      <a href="#" class="btn">Enviar respuesta</a>
-    </div>
+  <% end %>
+  <div class="btn-container">
+    <a href="#" class="btn">Enviar respuesta</a>
   </div>
+</div>
 </body>
 </html>
