@@ -10,12 +10,12 @@
     <ul class="options">
       <% question.options.each do |option| %>
         <li class="option">
-          <input type="radio" name="<%= "option#{question.id}" %>" id="<%= "option#{option.id}" %>" class="custom-radio">
-          <label for="<%= "option#{option.id}" %>"><%= option.option %></label>
+          <%= option.content %>
         </li>
       <% end %>
     </ul>
   <% end %>
+</div>
   <div class="btn-container">
     <a href="#" class="btn">Enviar respuesta</a>
   </div>
