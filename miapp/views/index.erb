@@ -1,6 +1,7 @@
 <!DOCTYPE html>
  <html>
    <head>
+     <link rel="stylesheet" href="styles/index.css"/>
      <title> ADT </title>
      <style>
        form {
@@ -8,17 +9,20 @@
          flex-direction: column;
          align-items: center;
          justify-content: center;
-         height: 100vh;
+         height: 70vh;
        }
      </style>
    </head>
    <body>
-     <h1> Argentina's Dream TEAM </h1>
-     <p>Inserte su nombre y clave para ingresar o crear su usuario</p>
+     <h1>Bienvenido a Argentina's Dream TEAM! </h1>
      <form action="/users" method="POST">
+      <img src="image/logo.png" width="800"> 
+      <p>Inserte su nombre y clave para ingresar</p>
+
        <input type="text" name="name" placeholder="Nombre">
        <input type="password" name="pass" placeholder="Contraseña">
-       <button>Register</button>
+       <button> <a href="/menu"> Ingresar </a> </button>
+       <p> ¿No tienes una cuenta? <a href="/register"> Registrate </a>  </p>
      </form>
    </body>
  </html>
