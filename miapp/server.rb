@@ -78,5 +78,10 @@ class App < Sinatra::Application
   get '/menu' do
     erb :menu
   end
+
+  
+  get '/question' do
+    erb :question
+  end
 end
 

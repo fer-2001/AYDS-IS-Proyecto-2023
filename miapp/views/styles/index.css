@@ -5,10 +5,13 @@ body {
 }
 
 h1 {
-  text-align: center;
-  margin-top: 0;
-  font-size: 2em;
-  color: #000;
+  font-family: Arial, sans-serif; /* Fuente del texto */
+  font-size: 28px; /* Tamaño del texto */
+  font-weight: bold; /* Grosor del texto */
+  color: #333; /* Color del texto */
+  text-align: center; /* Alineación del texto */
+  text-transform: uppercase; /* Convertir el texto en mayúsculas */
+  margin-bottom: 20px; /* Margen inferior del título */
 }
 
 img {
