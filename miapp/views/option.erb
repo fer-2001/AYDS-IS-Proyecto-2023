@@ -1,21 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title> Argentina Dream TEAM </title>
-  <link rel="stylesheet" href="/styles/option.css" />
+  <link rel="stylesheet" href="styles/option.css"/>
 </head>
 <body>
-  <h1>Argentina Dream TEAM</h1>
-  <h2>Pregunta</h2>
-  <p> What is the name of the world's most famous soccer stadium?</p>
-  <ul>
-    <li>Wembley Stadium</li>
-    <li>Camp Nou</li>
-    <li>Santiago Bernabéu Stadium</li>
-    <li>Old Trafford</li>
-  </ul>
+  <div class="container">
+    <div class="question">
+      Pregunta: ¿Cuál es tu opción favorita?
+    </div>
 
-  <button type="submit">Submit Answers</button>
+    <ul class="options">
+      <li class="option">
+        <input type="radio" name="option" id="option1" class="custom-radio">
+        <label for="option1">Opción 1</label>
+      </li>
+
+      <li class="option">
+        <input type="radio" name="option" id="option2" class="custom-radio">
+        <label for="option2">Opción 2</label>
+      </li>
+
+      <li class="option">
+        <input type="radio" name="option" id="option3" class="custom-radio">
+        <label for="option3">Opción 3</label>
+      </li>
+
+      <li class="option">
+        <input type="radio" name="option" id="option4" class="custom-radio">
+        <label for="option4">Opción 4</label>
+      </li>
+    </ul>
+    <div class="btn-container">
+      <a href="#" class="btn">Enviar respuesta</a>
+    </div>
+  </div>
 </body>
 </html>
-
