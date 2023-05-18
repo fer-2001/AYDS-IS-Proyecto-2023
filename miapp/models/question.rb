@@ -7,6 +7,6 @@ class Question < ActiveRecord::Base
     private
   
     def validate_option_count
-      errors.add(:options, "must be exactly 4") unless options.size == 4
+      errors.add(:options, "5 or more options") unless options.size <= 4
     end
   end
