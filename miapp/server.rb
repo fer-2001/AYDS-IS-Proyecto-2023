@@ -71,7 +71,7 @@ class App < Sinatra::Application
   end
 
   post '/users' do
-    @users = User.find(name: params[:name],pass: params[:pass])
+    @users = User.find_by(name: params[:name],pass: params[:pass])
     erb :users
   end
 
