@@ -5,20 +5,76 @@
 </head>
 <body>
   <div class="container">
-  <% @questions.each do |question| %>
-    <h2 class="question"><%= question.question %></h2>
-    <ul class="options">
-      <% question.options.each do |option| %>
-        <li class="option">
-          <%= option.content %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-</div>
-  <div class="btn-container">
-    <a href="#" class="btn">Enviar respuesta</a>
+    <% @questions.each_with_index do |question, index| %>
+      <div class="question" id="question<%= index %>">
+        <h2 class="question-title"><%= "Pregunta #{index + 1}: #{question.question}" %></h2>
+        <ul class="options">
+          <% question.options.each do |option| %>
+            <li class="option">
+              <input type="radio" id="option<%= option.id %>" name="question<%= index %>" value="<%= option.id %>" onchange="seleccionarRespuesta(<%= index %>, <%= option.id %>)">
+              <label for="option<%= option.id %>"><%= option.content %></label>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="btn-container">
+        <button class="btn" id="nextButton" onclick="mostrarSiguientePregunta()">Siguiente pregunta</button>
+      </div>
+    <% end %>
   </div>
-</div>
+
+
+  <script>
+    var totalPreguntas = <%= @questions.length %>;
+    var preguntaActual = 0;
+    var respuestas = [];
+
+    function ocultarPreguntas() {
+      var preguntas = document.querySelectorAll('.question');
+      preguntas.forEach(function(pregunta) {
+        pregunta.style.display = 'none';
+      });
+    }
+
+    function mostrarPreguntaActual() {
+      var preguntaActualElemento = document.getElementById('question' + preguntaActual);
+      preguntaActualElemento.style.display = 'block';
+    }
+
+    function seleccionarRespuesta(preguntaIndex, opcionId) {
+      respuestas[preguntaIndex] = opcionId;
+
+      // Resaltar la opción seleccionada
+      var opciones = document.querySelectorAll('#question' + preguntaIndex + ' .option');
+      opciones.forEach(function(opcion) {
+        opcion.classList.remove('selected');
+      });
+
+      var opcionSeleccionada = document.querySelector('#question' + preguntaIndex + ' .option input[type="radio"]:checked + label');
+      opcionSeleccionada.parentNode.classList.add('selected');
+    }
+
+    function mostrarSiguientePregunta() {
+      // Verificar si se ha seleccionado una respuesta
+      var respuestaSeleccionada = respuestas[preguntaActual];
+      if (respuestaSeleccionada === undefined) {
+        alert('Por favor, selecciona una respuesta antes de continuar.');
+        return;
+      }
+
+      ocultarPreguntas();
+
+      if (preguntaActual < totalPreguntas - 1) {
+        preguntaActual++;
+        mostrarPreguntaActual();
+      } else {
+        // Última pregunta, puedes realizar alguna acción aquí
+        alert('Has respondido todas las preguntas.');
+      }
+    }
+
+    ocultarPreguntas();
+    mostrarPreguntaActual();
+  </script>
 </body>
 </html>
