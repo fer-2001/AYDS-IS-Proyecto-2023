@@ -6,24 +6,23 @@
 <body>
   <div class="container">
     <% @questions.each_with_index do |question, index| %>
-      <div class="question-container" id="question<%= index %>">
-        <h2 class="question"><%= "Pregunta #{index + 1}: #{question.question}" %></h2>
+      <div class="question" id="question<%= index %>">
+        <h2 class="question-title"><%= "Pregunta #{index + 1}: #{question.question}" %></h2>
         <ul class="options">
           <% question.options.each do |option| %>
             <li class="option">
-              <button class="option-btn" onclick="seleccionarRespuesta(<%= index %>, <%= option.id %>)">
-                <%= option.content %>
-              </button>
+              <input type="radio" id="option<%= option.id %>" name="question<%= index %>" value="<%= option.id %>" onchange="seleccionarRespuesta(<%= index %>, <%= option.id %>)">
+              <label for="option<%= option.id %>"><%= option.content %></label>
             </li>
           <% end %>
         </ul>
       </div>
+      <div class="btn-container">
+        <button class="btn" id="nextButton" onclick="mostrarSiguientePregunta()">Siguiente pregunta</button>
+      </div>
     <% end %>
   </div>
 
-  <div class="btn-container">
-    <button class="btn" id="nextButton" onclick="mostrarSiguientePregunta()">Siguiente pregunta</button>
-  </div>
 
   <script>
     var totalPreguntas = <%= @questions.length %>;
@@ -31,7 +30,7 @@
     var respuestas = [];
 
     function ocultarPreguntas() {
-      var preguntas = document.querySelectorAll('.question-container');
+      var preguntas = document.querySelectorAll('.question');
       preguntas.forEach(function(pregunta) {
         pregunta.style.display = 'none';
       });
@@ -51,8 +50,8 @@
         opcion.classList.remove('selected');
       });
 
-      var opcionSeleccionada = document.querySelector('#question' + preguntaIndex + ' .option:nth-child(' + (opcionId + 1) + ')');
-      opcionSeleccionada.classList.add('selected');
+      var opcionSeleccionada = document.querySelector('#question' + preguntaIndex + ' .option input[type="radio"]:checked + label');
+      opcionSeleccionada.parentNode.classList.add('selected');
     }
 
     function mostrarSiguientePregunta() {

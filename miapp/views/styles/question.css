@@ -4,19 +4,27 @@ body {
   align-items: center;
   height: 100vh;
   font-family: Arial, sans-serif;
-  background-image: url("/image/background.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: linear-gradient(
+    135deg,
+    rgba(135, 206, 250, 0.8) 0%,
+    rgba(135, 206, 250, 0.8) 25%,
+    rgba(255, 255, 255, 0.8) 25%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(135, 206, 250, 0.8) 50%,
+    rgba(135, 206, 250, 0.8) 75%,
+    rgba(255, 255, 255, 0.8) 75%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
 }
 
 .container {
+  position: relative;
   max-width: 600px;
   padding: 30px;
-  background-color: rgba(245, 241, 5, 0.568);
-  border: 1px solid rgb(0, 0, 0);
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .question {
@@ -33,7 +41,6 @@ body {
   margin-bottom: 50px;
 }
 
-
 .option {
   display: flex;
   align-items: center;
@@ -46,9 +53,9 @@ body {
 }
 
 .option label {
-  font-size: 18px;
+  font-size: 20px;
   color: #555;
-  padding-left: 25px;
+  padding-left: 30px;
   position: relative;
   cursor: pointer;
 }
@@ -59,8 +66,8 @@ body {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   background-image: url("/image/viñeta1.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -84,20 +91,28 @@ body {
 }
 
 .btn-container {
-  text-align: center;
+  text-align: right;
+  margin-top: 20px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
-.btn {
+.btn-container button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #4caf50;
-  color: #fff;
+  background-color: hsl(180, 39%, 49%);
+  color: hsl(0, 0%, 0%);
   font-size: 18px;
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
 
-.btn:hover {
+.btn-container button:first-child {
+  margin-right: 10px;
+}
+
+.btn-container button:hover {
   background-color: #45a049;
 }
