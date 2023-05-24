@@ -71,8 +71,12 @@ class App < Sinatra::Application
   end
 
   post '/users' do
-    @users = User.find(name: params[:name],pass: params[:pass])
-    erb :users
+    @users = User.find_by(name: params[:name],pass: params[:pass]);
+    if @users == nil 
+     erb :noRegistrado
+    else
+      erb :users
+  end
   end
 
   post '/register' do
