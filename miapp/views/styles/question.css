@@ -92,10 +92,8 @@ body {
 
 .btn-container {
   text-align: right;
-  margin-top: 20px;
   position: absolute;
   bottom: 10px;
-  right: 10px;
 }
 
 .btn-container button {
@@ -110,7 +108,7 @@ body {
 }
 
 .btn-container button:first-child {
-  margin-right: 10px;
+  margin-right: 0px;
 }
 
 .btn-container button:hover {

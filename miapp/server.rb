@@ -65,9 +65,19 @@ class App < Sinatra::Application
   end
 
   post '/reports' do
-    @report = Report.find_or_create_by( descripcion: params[:descripcion],ide: params[:ide],
-                                         fecha: params[:fecha] )
+    @report = Report.find_or_create_by( description: params[:description],
+                                         date: params[:date] )
     erb :reports
+  end
+
+  get '/suggestion' do
+    erb :suggestion
+  end
+
+  post '/suggestion' do
+    @suggestion = Suggestion.find_or_create_by( description: params[:description],
+                                              date: params[:date] )
+    erb :suggestion
   end
 
   post '/users' do
