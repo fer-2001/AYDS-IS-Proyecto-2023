@@ -50,7 +50,8 @@
      <form action="/register" method="POST" onsubmit="checkInputs(event)">
       <p>Inserte un usuario y clave</p>
        <input type="text" name="name" placeholder="Usuario">
-       <input type="password" name="pass" placeholder="Contraseña">
+       <input type="password" name="pass" placeholder="Contraseña" pattern="(?=.*[A-Z])(?=.*\d).+" 
+       title="La contraseña debe contener al menos una letra mayúscula y un número" >
        <button>Registrar</button>
        <p class="error-message"></p>
      </form>
