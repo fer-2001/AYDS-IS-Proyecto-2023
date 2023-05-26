@@ -4,14 +4,55 @@
      <link rel="icon" href="/image/icon.png"/>
      <link rel="stylesheet" href="styles/register.css"/>
      <title> Registracion </title>
+     <style>
+    .error-message {
+      color: red;
+      font-style: italic;
+      margin-top: 10px;
+      font-weight: bold;
+      text-align: center;
+      display: none;
+      font-size: calc(1em - 2px);
+    }
+  </style>
+  <script>
+    function checkInputs(event) {
+        var nameInput = document.querySelector('input[name="name"]');
+        var passInput = document.querySelector('input[name="pass"]');
+        var errorMessage = document.querySelector('.error-message');
+
+        nameInput.style.border = '1px solid #ccc';
+        passInput.style.border = '1px solid #ccc';
+        errorMessage.style.display = 'none';
+
+        if (nameInput.value.trim() === '' && passInput.value.trim() === '') {
+          event.preventDefault();
+          nameInput.style.border = '1px solid red';
+          passInput.style.border = '1px solid red';
+          errorMessage.textContent = 'No se pueden enviar casillas en blanco';
+          errorMessage.style.display = 'block';
+        } else if (nameInput.value.trim() === '') {
+          event.preventDefault();
+          nameInput.style.border = '1px solid red';
+          errorMessage.textContent = 'El campo Usuario no puede estar en blanco';
+          errorMessage.style.display = 'block';
+        } else if (passInput.value.trim() === '') {
+          event.preventDefault();
+          passInput.style.border = '1px solid red';
+          errorMessage.textContent = 'El campo Contraseña no puede estar en blanco';
+          errorMessage.style.display = 'block';
+        }
+      }
+    </script>
    </head>
    <body>
      <h1>Crear cuenta </h1>
-     <form action="/register" method="POST">
+     <form action="/register" method="POST" onsubmit="checkInputs(event)">
       <p>Inserte un usuario y clave</p>
        <input type="text" name="name" placeholder="Usuario">
        <input type="password" name="pass" placeholder="Contraseña">
        <button>Registrar</button>
+       <p class="error-message"></p>
      </form>
    </body>
  </html>
