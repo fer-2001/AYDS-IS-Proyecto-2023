@@ -13,28 +13,28 @@
       justify-content: center;
       height: 70vh;
     }
-    
+
     img {
       max-width: 100%;
       height: auto;
     }
-    
+
     h1 {
       text-align: center;
     }
-    
+
     p {
       text-align: center;
     }
-    
+
     input, button {
       width: 100%;
     }
-    
+
     button {
       margin-top: 10px;
     }
-    
+
     a {
       display: block;
       text-align: center;
@@ -43,12 +43,12 @@
     button {
       margin-top: 10px;
     }
-    
+
     a.disabled {
       pointer-events: none;
       color: gray;
     }
-    
+
     .error-message {
       color: red;
       font-style: italic;
@@ -57,7 +57,7 @@
       text-align: center;
       display: none;
     }
-    
+
     .error-input {
       border: 1px solid red;
     }
@@ -119,8 +119,8 @@
   <form action="/users" method="POST">
     <img src="image/logo.png" alt="Logo" width="800">
     <p>Inserte su nombre y clave para ingresar</p>
-    <input type="text" required name="name" placeholder="Nombre" oninput="checkInputs()">
-    <input type="password" required name="pass" placeholder="Contraseña" oninput="checkInputs()">
+    <input type="text" required name="username" placeholder="Nombre" oninput="checkInputs()">
+    <input type="password" required name="password" placeholder="Contraseña" oninput="checkInputs()">
     <button id="ingresar-button" onclick="checkInputs(event)"> <a href="/menu"> Ingresar </a></button>
     <p class="error-message" id="error-message"></p>
     <p><a href="/register">Registrate</a></p>

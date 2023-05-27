@@ -2,6 +2,11 @@ require 'sinatra/base'
 require 'bundler/setup'
 require 'logger'
 require 'sinatra/activerecord'
+require 'sinatra/flash'
+require 'rack/session/cookie'
+
+
+
 
 require 'sinatra/reloader' if Sinatra::Base.environment == :development
 
@@ -22,6 +27,15 @@ class App < Sinatra::Application
     super()
   end
 
+  use Rack::Session::Cookie,
+    key: 'my_app_session',
+    secret: 'my_app_secret_key',
+    expire_after: nil # Sesión persistente
+
+  enable :sessions
+  register Sinatra::Flash
+
+
   set :root,  File.dirname('miapp')
   set :views, Proc.new { File.join(root, 'views') }
   set :public_folder, File.dirname(__FILE__) + '/views'
@@ -41,17 +55,22 @@ class App < Sinatra::Application
     end
   end
 
-  get '/game' do
-    logger.info 'USANDO LOGGER INFO EN GAME PATH'
-    'Game'
+  before do
+    # Verifica si el usuario ha iniciado sesión antes de permitir el acceso a todas las rutas excepto /login
+    unless ['/','/register','/users','/noRegistrado'].include?(request.path_info) || session[:user_id]
+      redirect '/' # Redirige al formulario de inicio de sesión si el usuario no ha iniciado sesión
+    end
   end
 
+
+
   get '/' do
+    # Si el usuario ya ha iniciado sesión, redirige a la página de inicio
+    redirect '/menu' if session[:user_id]
     erb :index
   end
 
   get '/users' do
-    @users = User.all
     erb :users
   end
 
@@ -81,13 +100,35 @@ class App < Sinatra::Application
   end
 
   post '/users' do
-    @users = User.find_by(name: params[:name],pass: params[:pass]);
-    if @users == nil 
-     erb :noRegistrado
+    username = params[:username]
+    password = params[:password]
+
+    # Verifica las credenciales del usuario en tu lógica de autenticación
+    user = User.find_by(name: username, pass: password)
+
+
+    if user
+      # Credenciales válidas, establece la sesión
+      session[:user_id] = user.id
+      session[:username] = user.name
+
+      redirect '/menu' # Redirige a la página de inicio después del inicio de sesión exitoso
     else
-      erb :users
+      # Credenciales inválidas, muestra un mensaje de error
+      flash[:error] = 'Nombre de usuario o contraseña incorrectos'
+      redirect '/noRegistrado' # Redirige de nuevo al formulario de inicio de sesión
+    end
   end
+
+  get '/noRegistrado' do
+    erb :noRegistrado
   end
+
+  post '/logout' do
+    session.clear
+    redirect '/'
+  end
+
 
   post '/register' do
     @users = User.find_or_create_by(name: params[:name],pass: params[:pass])
@@ -103,4 +144,3 @@ class App < Sinatra::Application
     erb :question
   end
 end
-
