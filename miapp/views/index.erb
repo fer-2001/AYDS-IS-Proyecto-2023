@@ -13,28 +13,28 @@
       justify-content: center;
       height: 70vh;
     }
-    
+
     img {
       max-width: 100%;
       height: auto;
     }
-    
+
     h1 {
       text-align: center;
     }
-    
+
     p {
       text-align: center;
     }
-    
+
     input, button {
       width: 100%;
     }
-    
+
     button {
       margin-top: 10px;
     }
-    
+
     a {
       display: block;
       text-align: center;
@@ -46,8 +46,8 @@
   <form action="/users" method="POST">
     <img src="image/logo.png" alt="Logo" width="800">
     <p>Inserte su nombre y clave para ingresar</p>
-    <input type="text" name="name" placeholder="Nombre">
-    <input type="password" name="pass" placeholder="Contraseña">
+    <input type="text" id="name" name="username" placeholder="Nombre">
+    <input type="password" id="pass" name="password" placeholder="Contraseña">
     <button><a href="/menu">Ingresar</a></button>
     <p><a href="/register">Registrate</a></p>
   </form>

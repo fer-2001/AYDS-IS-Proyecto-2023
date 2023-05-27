@@ -21,6 +21,8 @@ GEM
     rack (2.2.7)
     rack-protection (3.0.6)
       rack
+    rack-session (1.0.1)
+      rack (< 3)
     rake (13.0.6)
     ruby2_keywords (0.0.5)
     sinatra (3.0.6)
@@ -37,6 +39,8 @@ GEM
       rack-protection (= 3.0.6)
       sinatra (= 3.0.6)
       tilt (~> 2.0)
+    sinatra-flash (0.3.0)
+      sinatra (>= 1.0.0)
     sqlite3 (1.6.2-x64-mingw-ucrt)
     sqlite3 (1.6.2-x86_64-linux)
     tilt (2.1.0)
@@ -50,10 +54,12 @@ PLATFORMS
 
 DEPENDENCIES
   multi_json
+  rack-session
   rake
   sinatra
   sinatra-activerecord
   sinatra-contrib
+  sinatra-flash
   sqlite3
   webrick
 

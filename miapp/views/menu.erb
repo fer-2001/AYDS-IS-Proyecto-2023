@@ -53,6 +53,20 @@
     .button a:hover {
       background-color: #333;
     }
+    .button input[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background-color: #000000;
+      color: #fff;
+      text-align: center;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+    .button input[type="submit"]:hover {
+      background-color: #333;
+    }
     .logo {
       display: block;
       margin: 0 auto;
@@ -69,6 +83,11 @@
       <li class="button"><a href="#">Progreso</a></li>
       <li class="button"><a href="/reports">Reporte</a></li>
       <li class="button"><a href="/suggestion">Sugerencia</a></li>
+      <li class="button">
+        <form action="/logout" method="post">
+          <input type="submit" value="Cerrar sesión">
+        </form>
+      </li>
     </ul>
   </div>
 </body>
