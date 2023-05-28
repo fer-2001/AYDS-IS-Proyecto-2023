@@ -143,4 +143,22 @@ class App < Sinatra::Application
     @questions = Question.includes(:options)
     erb :question
   end
+
+  post '/questions' do
+    user_id = session[:user_id]
+    option_id = params[:option_id]
+  
+    if user_id && option_id
+      response = Response.create(user_id: user_id, option_id: option_id)
+      # Aquí puedes realizar otras acciones relacionadas con la respuesta
+  
+      redirect '/questions' # Redirige nuevamente a la página de preguntas
+    else
+      flash[:error] = 'Opción inválida. Por favor, selecciona una opción antes de continuar.'
+      redirect '/questions' # Redirige nuevamente a la página de preguntas
+    end
+  end
+  
+  
+  
 end

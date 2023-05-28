@@ -7,24 +7,27 @@
 </head>
 <body>
   <div class="container">
-    <% @questions.each_with_index do |question, index| %>
-      <div class="question" id="question<%= index %>">
-        <h2 class="question-title"><%= "Pregunta #{index + 1}: #{question.question}" %></h2>
-        <ul class="options">
-          <% question.options.each do |option| %>
-            <li class="option">
-              <input type="radio" id="option<%= option.id %>" name="question<%= index %>" value="<%= option.id %>" onchange="seleccionarRespuesta(<%= index %>, <%= option.id %>)">
-              <label for="option<%= option.id %>"><%= option.content %></label>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+    <form id="questionForm" action="/questions" method="POST">
+      <% @questions.each_with_index do |question, index| %>
+        <div class="question" id="question<%= index %>" <%= 'style="display: none;"' if index != 0 %>>
+          <h2 class="question-title"><%= "Pregunta #{index + 1}: #{question.question}" %></h2>
+          <ul class="options">
+            <% question.options.each do |option| %>
+              <li class="option">
+                <input type="radio" id="option<%= option.id %>" name="question<%= index %>" value="<%= option.id %>" onchange="seleccionarRespuesta(<%= index %>, <%= option.id %>)">
+                <label for="option<%= option.id %>"><%= option.content %></label>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <div class="btn-container">
-        <button class="btn" id="nextButton" onclick="mostrarSiguientePregunta()">Siguiente pregunta</button>
+        <button class="btn" id="nextButton" onclick="enviarFormulario()">Siguiente pregunta</button>
       </div>
-    <% end %>
+      <input type="hidden" name="user_id" value="<%= session[:user_id] %>">
+      <input type="hidden" name="option_id" id="option_id" value="">
+    </form>
   </div>
-
 
   <script>
     var totalPreguntas = <%= @questions.length %>;
@@ -53,10 +56,16 @@
       });
 
       var opcionSeleccionada = document.querySelector('#question' + preguntaIndex + ' .option input[type="radio"]:checked + label');
-      opcionSeleccionada.parentNode.classList.add('selected');
+      if (opcionSeleccionada) {
+        opcionSeleccionada.parentNode.classList.add('selected');
+      }
+
+      // Establecer el valor de la opción seleccionada en el formulario
+      var optionInput = document.getElementById('option_id');
+      optionInput.value = opcionId;
     }
 
-    function mostrarSiguientePregunta() {
+    function enviarFormulario() {
       // Verificar si se ha seleccionado una respuesta
       var respuestaSeleccionada = respuestas[preguntaActual];
       if (respuestaSeleccionada === undefined) {
@@ -64,14 +73,16 @@
         return;
       }
 
-      ocultarPreguntas();
+      // Enviar el formulario actual
+      document.getElementById('questionForm').submit();
 
       if (preguntaActual < totalPreguntas - 1) {
         preguntaActual++;
+        ocultarPreguntas();
         mostrarPreguntaActual();
       } else {
-        // Última pregunta, puedes realizar alguna acción aquí
-        alert('Has respondido todas las preguntas.');
+        // Se han respondido todas las preguntas
+        alert('¡Has respondido todas las preguntas!');
       }
     }
 
