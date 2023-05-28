@@ -84,7 +84,8 @@ class App < Sinatra::Application
   end
 
   post '/reports' do
-    @report = Report.find_or_create_by( description: params[:description],
+    user_id = session[:user_id]
+    @report = Report.find_or_create_by(user_id: params[:user_id], description: params[:description],
                                          date: params[:date] )
     erb :reports
   end
@@ -93,9 +94,16 @@ class App < Sinatra::Application
     erb :suggestion
   end
 
+  
+  get '/progress' do
+    erb :progress
+  end
+
+
   post '/suggestion' do
-    @suggestion = Suggestion.find_or_create_by( description: params[:description],
-                                              date: params[:date] )
+    user_id = session[:user_id]
+    @suggestion = Suggestion.find_or_create_by( user_id: params[:user_id],description: params[:description],
+                                              date: params[:date])
     erb :suggestion
   end
 

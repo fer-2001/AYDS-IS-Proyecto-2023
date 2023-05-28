@@ -12,6 +12,8 @@
         <p> Gracias por contribuir con tu sugerencia!</p>
         <input type="text" name="description" placeholder="Sugerencia">
         <input type="date" name="date" placeholder="fecha">
+         <input type="hidden" name="user_id" value="<%= session[:user_id] %>">
+
       <div class="btn-container">
         <button>Enviar sugerencia</button>
       </div>
