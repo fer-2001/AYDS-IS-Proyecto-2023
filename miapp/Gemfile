@@ -1,19 +1,16 @@
 ruby '3.2.2'
 
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 gem 'multi_json'
-gem 'webrick'
-gem 'sinatra-flash'
 gem 'rack-session'
-#github 'sinatra/sinatra' do
-  gem 'sinatra'
-  gem 'sinatra-contrib'
-#end
+gem 'sinatra-flash'
+gem 'webrick'
+# github 'sinatra/sinatra' do
+gem 'sinatra'
+gem 'sinatra-contrib'
+# end
 
+gem 'rake'
 gem 'sinatra-activerecord'
 gem 'sqlite3'
-gem 'rake'
-
-
-

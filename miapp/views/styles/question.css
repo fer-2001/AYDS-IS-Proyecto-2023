@@ -114,3 +114,13 @@ body {
 .btn-container button:hover {
   background-color: #45a049;
 }
+
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+}
+
