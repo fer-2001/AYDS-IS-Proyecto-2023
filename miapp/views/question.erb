@@ -2,81 +2,157 @@
 <html>
 <head>
   <link rel="icon" href="/image/icon.png"/>
-  <link rel="stylesheet" href="styles/question.css"/>
-  <title> ADT </title>
+  <link rel="stylesheet" href="/styles/question.css"/>
+  <title>ADT</title>
+  <style>
+    .correct {
+      color: #FFFFFF;  /* Texto blanco */
+      background-color: #75AADB;  /* Celeste */
+      font-weight: bold;
+      /*padding: 10px;*/
+      border-radius: 10px;
+      animation: mensajeAnimacion 2s ease-in-out;
+      margin-bottom: 40px;
+    }
+
+    .incorrect {
+      color: #FFFFFF;  /* Texto blanco */
+      background-color: #9F2232;  /* Rojo */
+      font-weight: bold;
+      /*padding: 10px;*/
+      border-radius: 10px;
+      animation: mensajeAnimacion 2s ease-in-out;
+      margin-bottom: 40px;
+    }
+
+    @keyframes mensajeAnimacion {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+  </style>
+
 </head>
 <body>
   <div class="container">
     <% @questions.each_with_index do |question, index| %>
-      <div class="question" id="question<%= index %>">
+      <div class="question" id="question<%= index %>" <%= 'style="display: none;"' if index != 0 %>>
         <h2 class="question-title"><%= "Pregunta #{index + 1}: #{question.question}" %></h2>
         <ul class="options">
           <% question.options.each do |option| %>
             <li class="option">
-              <input type="radio" id="option<%= option.id %>" name="question<%= index %>" value="<%= option.id %>" onchange="seleccionarRespuesta(<%= index %>, <%= option.id %>)">
+              <input type="radio" id="option<%= option.id %>" name="option" value="<%= option.id %>" onchange="seleccionarRespuesta(<%= index %>, <%= option.correct %>)">
               <label for="option<%= option.id %>"><%= option.content %></label>
             </li>
+            <li class="option <%= 'correct' if option.correct %><%= 'incorrect' unless option.correct %>">
           <% end %>
         </ul>
-      </div>
-      <div class="btn-container">
-        <button class="btn" id="nextButton" onclick="mostrarSiguientePregunta()">Siguiente pregunta</button>
+        <div class="question-response"></div>
       </div>
     <% end %>
+    <div class="btn-container">
+      <button class="btn" id="nextButton" type="button" onclick="enviarFormulario()">Siguiente pregunta</button>
+    </div>
+    <input type="hidden" name="user_id" value="<%= session[:user_id] %>">
+    <input type="hidden" name="option_id" id="option_id" value="">
   </div>
 
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script>
+  var totalPreguntas = <%= @questions.length %>;
+  var preguntaActual = 0;
+  var respuestas = [];
 
-  <script>
-    var totalPreguntas = <%= @questions.length %>;
-    var preguntaActual = 0;
-    var respuestas = [];
+  function ocultarPreguntas() {
+    $('.question').hide();
+  }
 
-    function ocultarPreguntas() {
-      var preguntas = document.querySelectorAll('.question');
-      preguntas.forEach(function(pregunta) {
-        pregunta.style.display = 'none';
-      });
+  function mostrarPreguntaActual() {
+    $('#question' + preguntaActual).show();
+  }
+
+  function seleccionarRespuesta(preguntaIndex, correct) {
+    respuestas[preguntaIndex] = correct;
+
+    // Resaltar la opción seleccionada
+    var opciones = $('#question' + preguntaIndex + ' .option');
+    opciones.removeClass('selected');
+
+    var opcionSeleccionada = $('#question' + preguntaIndex + ' .option input[type="radio"]:checked + label');
+    if (opcionSeleccionada.length > 0) {
+      opcionSeleccionada.closest('.option').addClass('selected');
     }
 
-    function mostrarPreguntaActual() {
-      var preguntaActualElemento = document.getElementById('question' + preguntaActual);
-      preguntaActualElemento.style.display = 'block';
-    }
+    // Establecer el valor de la opción seleccionada en el formulario
+    $('#option_id').val(correct);
+  }
 
-    function seleccionarRespuesta(preguntaIndex, opcionId) {
-      respuestas[preguntaIndex] = opcionId;
+  function mostrarMensajeRespuesta(correct) {
+    var mensaje = correct ? 'Correcta' : 'Incorrecta';
+    var respuestaElemento = $('#question' + preguntaActual + ' .question-response');
+    respuestaElemento.text('Respuesta: ' + mensaje);
+    respuestaElemento.removeClass('correct incorrect');
+    respuestaElemento.addClass(correct ? 'correct' : 'incorrect');
+  }
 
-      // Resaltar la opción seleccionada
-      var opciones = document.querySelectorAll('#question' + preguntaIndex + ' .option');
-      opciones.forEach(function(opcion) {
-        opcion.classList.remove('selected');
-      });
+  function enviarFormulario() {
+  // Verificar si se ha seleccionado una respuesta
+  var respuestaSeleccionada = respuestas[preguntaActual];
+  if (respuestaSeleccionada === undefined) {
+    alert('Por favor, selecciona una respuesta antes de continuar.');
+    return;
+  }
 
-      var opcionSeleccionada = document.querySelector('#question' + preguntaIndex + ' .option input[type="radio"]:checked + label');
-      opcionSeleccionada.parentNode.classList.add('selected');
-    }
+  // Mostrar mensaje de respuesta
+  mostrarMensajeRespuesta(respuestaSeleccionada);
 
-    function mostrarSiguientePregunta() {
-      // Verificar si se ha seleccionado una respuesta
-      var respuestaSeleccionada = respuestas[preguntaActual];
-      if (respuestaSeleccionada === undefined) {
-        alert('Por favor, selecciona una respuesta antes de continuar.');
-        return;
-      }
+   // Desactivar las opciones de respuesta
+  $('#question' + preguntaActual + ' input[type="radio"]').attr('disabled', 'disabled');
 
-      ocultarPreguntas();
+  // Almacenar la respuesta en la base de datos
+  var optionId = $('input[name="option"]:checked').val();
+  var userId = $('input[name="user_id"]').val();
 
-      if (preguntaActual < totalPreguntas - 1) {
-        preguntaActual++;
-        mostrarPreguntaActual();
+  $.ajax({
+    url: '/responses',
+    method: 'POST',
+    data: JSON.stringify({
+      option_id: optionId,
+      user_id: userId
+    }),
+    contentType: 'application/json',
+    success: function(response) {
+      if (response === "¡Respuesta correcta!") {
+        mostrarMensajeRespuesta(true);
       } else {
-        // Última pregunta, puedes realizar alguna acción aquí
-        alert('Has respondido todas las preguntas.');
+        mostrarMensajeRespuesta(false);
       }
-    }
+      console.log('Respuesta almacenada en la base de datos.');
 
+      // Retrasar el cambio de pregunta
+      setTimeout(function() {
+        // Pasar a la siguiente pregunta
+        preguntaActual++;
+        if (preguntaActual < totalPreguntas) {
+          ocultarPreguntas();
+          mostrarPreguntaActual();
+        } else {
+          // Se han respondido todas las preguntas
+          window.location.href = '/end_game';
+        }
+      }, 2000); // Retraso de 2 segundos (2000 milisegundos)
+    },
+    error: function(xhr) {
+      console.error('Error al almacenar la respuesta en la base de datos.');
+    }
+  });
+}
+
+  $(document).ready(function() {
     ocultarPreguntas();
     mostrarPreguntaActual();
-  </script>
+  });
+</script>
+
 </body>
 </html>

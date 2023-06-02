@@ -5,11 +5,7 @@ require 'sinatra/activerecord'
 require 'sinatra/flash'
 require 'rack/session/cookie'
 
-
-
-
 require 'sinatra/reloader' if Sinatra::Base.environment == :development
-
 
 require_relative 'models/user'
 require_relative 'models/report'
@@ -19,25 +15,21 @@ require_relative 'models/suggestion'
 require_relative 'models/option'
 require_relative 'models/response'
 
-
-
-
 class App < Sinatra::Application
-  def initialize(app = nil)
+  def initialize(_app = nil)
     super()
   end
 
   use Rack::Session::Cookie,
-    key: 'my_app_session',
-    secret: 'my_app_secret_key',
-    expire_after: nil # Sesión persistente
+      key: 'my_app_session',
+      secret: 'my_app_secret_key',
+      expire_after: nil # Sesión persistente
 
   enable :sessions
   register Sinatra::Flash
 
-
   set :root,  File.dirname('miapp')
-  set :views, Proc.new { File.join(root, 'views') }
+  set :views, proc { File.join(root, 'views') }
   set :public_folder, File.dirname(__FILE__) + '/views'
   configure :production, :development do
     enable :logging
@@ -46,7 +38,6 @@ class App < Sinatra::Application
     logger.level = Logger::DEBUG if development?
     set :logger, logger
   end
-
 
   configure :development do
     register Sinatra::Reloader
@@ -57,12 +48,10 @@ class App < Sinatra::Application
 
   before do
     # Verifica si el usuario ha iniciado sesión antes de permitir el acceso a todas las rutas excepto /login
-    unless ['/','/register','/users','/noRegistrado'].include?(request.path_info) || session[:user_id]
+    unless ['/', '/register', '/users', '/noRegistrado'].include?(request.path_info) || session[:user_id]
       redirect '/' # Redirige al formulario de inicio de sesión si el usuario no ha iniciado sesión
     end
   end
-
-
 
   get '/' do
     # Si el usuario ya ha iniciado sesión, redirige a la página de inicio
@@ -84,8 +73,8 @@ class App < Sinatra::Application
   end
 
   post '/reports' do
-    @report = Report.find_or_create_by( description: params[:description],
-                                         date: params[:date] )
+    @report = Report.find_or_create_by(description: params[:description],
+                                       date: params[:date])
     erb :reports
   end
 
@@ -94,8 +83,8 @@ class App < Sinatra::Application
   end
 
   post '/suggestion' do
-    @suggestion = Suggestion.find_or_create_by( description: params[:description],
-                                              date: params[:date] )
+    @suggestion = Suggestion.find_or_create_by(description: params[:description],
+                                               date: params[:date])
     erb :suggestion
   end
 
@@ -105,7 +94,6 @@ class App < Sinatra::Application
 
     # Verifica las credenciales del usuario en tu lógica de autenticación
     user = User.find_by(name: username, pass: password)
-
 
     if user
       # Credenciales válidas, establece la sesión
@@ -129,9 +117,8 @@ class App < Sinatra::Application
     redirect '/'
   end
 
-
   post '/register' do
-    @users = User.find_or_create_by(name: params[:name],pass: params[:pass])
+    @users = User.find_or_create_by(name: params[:name], pass: params[:pass])
     erb :users
   end
 
@@ -140,7 +127,46 @@ class App < Sinatra::Application
   end
 
   get '/questions' do
-    @questions = Question.includes(:options)
+    @questions = Question.all
     erb :question
+  end
+
+  get '/end_game' do
+    erb :end_game
+  end
+
+
+  post '/responses' do
+    request_body = JSON.parse(request.body.read)
+
+    option_id = request_body['option_id']
+    user_id = request_body['user_id']
+
+    # Verificar si la opción y el usuario existen
+    option = Option.find_by(id: option_id)
+    user = User.find_by(id: user_id)
+    unless option && user
+      status 404
+      return 'Opción o usuario no encontrados'
+    end
+
+    # Verificar si el usuario ya ha respondido esa pregunta
+    response = Response.find_by(user_id:, option_id:)
+    if response
+      new_question = Question.where.not(id: @questions.map(&:id)).sample
+      # Serializar la nueva pregunta y enviarla como respuesta al cliente
+      content_type :json
+      { question: new_question }.to_json
+    else
+      # Crear la respuesta y asociarla al usuario y la opción
+      is_correct = option.correct
+      Response.create(user_id:, option_id:)
+
+      if is_correct
+        '¡Respuesta correcta!'
+      else
+        'Respuesta incorrecta'
+      end
+    end
   end
 end
