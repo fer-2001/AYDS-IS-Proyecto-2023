@@ -171,6 +171,7 @@ class App < Sinatra::Application
       Response.create(user_id:, option_id:)
 
       if is_correct
+
         '¡Respuesta correcta!'
       else
         'Respuesta incorrecta'

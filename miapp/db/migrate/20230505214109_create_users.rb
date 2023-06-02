@@ -3,9 +3,9 @@ class CreateUsers < ActiveRecord::Migration[7.0]
     create_table :users do |t|
       t.string :name
       t.string :pass
-      t.integer :lifes
-      t.integer :points
-      t.integer :streak
+      t.integer :lifes , default: 5
+      t.integer :points, default: 0
+      t.integer :streak, default: 0
       t.timestamps
     end
   end
