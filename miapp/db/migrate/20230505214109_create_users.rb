@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.integer :lifes , default: 5
       t.integer :points, default: 0
       t.integer :streak, default: 0
+      t.string :role, default: 'clasificado'
       t.timestamps
     end
   end

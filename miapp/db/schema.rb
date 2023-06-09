@@ -74,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_014432) do
     t.integer "lifes", default: 5
     t.integer "points", default: 0
     t.integer "streak", default: 0
+    t.string "role", default: "Clasificado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

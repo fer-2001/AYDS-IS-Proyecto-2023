@@ -15,11 +15,16 @@ class User < ActiveRecord::Base
     finalista: 'Finalista',
     campeon: 'Campeon',
   }.freeze
+
+  attribute :role, :string, default: 'clasificado'
+
   validates :role, inclusion: { in: ROLES.values }
+
   def role=(value)
-    super(ROLES.key(value.to_s))
+    self[:role] = ROLES.key(value.to_s).to_s
   end
+
   def role
-    ROLES[super]
+    ROLES[self[:role].to_sym]
   end
 end
