@@ -31,97 +31,16 @@
       width: 100%;
     }
 
-    button {
-      margin-top: 10px;
-    }
-
-    a {
-      display: block;
-      text-align: center;
-    }
-
-    button {
-      margin-top: 10px;
-    }
-
-    a.disabled {
-      pointer-events: none;
-      color: gray;
-    }
-
-    .error-message {
-      color: red;
-      font-style: italic;
-      margin-top: 10px;
-      font-weight: bold;
-      text-align: center;
-      display: none;
-    }
-
-    .error-input {
-      border: 1px solid red;
-    }
   </style>
-  <script>
-    function checkInputs(event) {
-      var nameInput = document.querySelector('input[name="name"]');
-      var passInput = document.querySelector('input[name="pass"]');
-      var ingresarButton = document.getElementById("ingresar-button");
-      var ingresarLink = document.getElementById("ingresar-link");
-      var errorMessage = document.getElementById("error-message");
-
-      nameInput.classList.remove("error-input");
-      passInput.classList.remove("error-input");
-      errorMessage.textContent = "";
-      errorMessage.style.display = "none";
-
-      if (nameInput.value.trim() === "" && passInput.value.trim() === "") {
-        event.preventDefault();
-        errorMessage.textContent = "No se pueden enviar casillas en blanco";
-        errorMessage.style.display = "block";
-
-        nameInput.classList.add("error-input");
-        passInput.classList.add("error-input");
-
-        ingresarButton.disabled = true;
-        ingresarLink.classList.add("disabled");
-        ingresarLink.removeAttribute("href");
-      } else if (nameInput.value.trim() === "") {
-        event.preventDefault();
-        errorMessage.textContent = "El campo Nombre no puede estar en blanco";
-        errorMessage.style.display = "block";
-
-        nameInput.classList.add("error-input");
-
-        ingresarButton.disabled = true;
-        ingresarLink.classList.add("disabled");
-        ingresarLink.removeAttribute("href");
-      } else if (passInput.value.trim() === "") {
-        event.preventDefault();
-        errorMessage.textContent = "El campo Contraseña no puede estar en blanco";
-        errorMessage.style.display = "block";
-
-        passInput.classList.add("error-input");
-
-        ingresarButton.disabled = true;
-        ingresarLink.classList.add("disabled");
-        ingresarLink.removeAttribute("href");
-      } else {
-        ingresarButton.disabled = false;
-        ingresarLink.classList.remove("disabled");
-        ingresarLink.setAttribute("href", "/menu");
-      }
-    }
-  </script>
 </head>
 <body>
   <h1>Bienvenido a Argentina's <br> Dream TEAM!</h1>
   <form action="/users" method="POST">
     <img src="image/logo.png" alt="Logo" width="800">
     <p>Inserte su nombre y clave para ingresar</p>
-    <input type="text" required name="username" placeholder="Nombre" oninput="checkInputs()">
-    <input type="password" required name="password" placeholder="Contraseña" oninput="checkInputs()">
-    <button id="ingresar-button" onclick="checkInputs(event)"> <a href="/menu"> Ingresar </a></button>
+    <input type="text" required name="username" placeholder="Nombre" >
+    <input type="password" required name="password" placeholder="Contraseña">
+    <button id="ingresar-button">Ingresar</button>
     <p class="error-message" id="error-message"></p>
     <p><a href="/register">Registrate</a></p>
   </form>
