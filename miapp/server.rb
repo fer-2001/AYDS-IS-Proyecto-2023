@@ -194,21 +194,22 @@ class App < Sinatra::Application
         progress = Progress.create(user_id: user_id)
       end
        # Obtener el progreso del usuario
-
       if progress
         question = option.question
-
         if is_correct
           progress.correct_answers += 1
           progress.points += question.cantPoints
+          user.points += question.cantPoints
+          user.streak += 1
         else
           progress.incorrect_answers += 1
           progress.lose_points += question.cantPoints
-          user.lifes -= 1
-          user.save!
+          user.lifes -= 1 
+          user.streak = 0 
         end
 
         progress.current_question += 1
+        user.save!
         progress.save!
       end
 

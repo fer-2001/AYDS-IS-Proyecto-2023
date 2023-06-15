@@ -20,16 +20,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_014432) do
     t.index ["question_id"], name: "index_options_on_question_id"
   end
 
-  create_table "progress", force: :cascade do |t|
+  create_table "progresses", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "correctAnswers", default: 0
-    t.integer "incorrectAnswers", default: 0
-    t.integer "losePoints", default: 0
+    t.integer "current_question", default: 0
+    t.integer "correct_answers", default: 0
+    t.integer "incorrect_answers", default: 0
+    t.integer "lose_points", default: 0
     t.integer "points", default: 0
-    t.string "role"
+    t.integer "question_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_progress_on_user_id"
+    t.index ["user_id"], name: "index_progresses_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -74,7 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_014432) do
     t.integer "lifes", default: 5
     t.integer "points", default: 0
     t.integer "streak", default: 0
-    t.string "role", default: "Clasificado"
+    t.string "role", default: "clasificado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

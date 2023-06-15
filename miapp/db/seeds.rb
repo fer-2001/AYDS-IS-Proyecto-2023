@@ -13,7 +13,7 @@ generate_question('¿Cuántos goles marcó Lionel Messi durante el Mundial 2022?
                     { content: '5', correct: false },
                     { content: '3', correct: false },
                     #{Messi metio 7 goles en el mundial 2022, salio 2do mayor goleador del mundial}
-                  ], 3, 10, 'Messi metio 7 goles en el mundial 2022, salio 2do mayor goleador del mundial')
+                  ], 3, 10, 'Messi salio 2do mayor goleador del mundial 2022 jugado en Qatar')
 
 generate_question('¿Cuál fue el resultado del partido de Argentina contra Francia en la final del mundial 2022?', [
                     { content: 'Empate 3-3', correct: true },
@@ -56,7 +56,7 @@ generate_question('¿Cuantos goles hizo Argentina en la Copa America?', [
                     { content: '12', correct: true },
                     { content: '25', correct: false },
                     { content: '18', correct: false }
-                  ], 8, 15, 'COMPLETAR')
+                  ], 8, 15, 'Esta fue la cuadragésima tercera participación de Argentina')
 
 generate_question('¿Quien marco el gol ganador en la final Copa America?', [
                     { content: 'Lionel Messi', correct: false },
