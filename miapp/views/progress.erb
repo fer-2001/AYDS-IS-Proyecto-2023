@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="/styles/progress.css"/>
+<h1 class="page-title">Este es tu Progreso:</h1>
+<div class="player-card">
+  <div class="name-and-info">
+    <h2 class="player-name"><%= @user.name %></h2>
+    <div class="player-info">
+      <div class="player-image-above-info">
+        <img src="/image/silueta.png" alt="Imagen arriba de la información del jugador">
+      </div>
+      <p><span class="label">Puntos:</span> <span class="data"><%= @progress.points %></span></p>
+      <p><span class="label">Correctas:</span> <span class="data"><%= @progress.correct_answers %></span></p>
+      <p><span class="label">Incorrectas:</span> <span class="data"><%= @progress.incorrect_answers %></span></p>
+      <p><span class="label">Racha:</span> <span class="data"><%= @user.streak %></span></p>
+      <p><span class="label">Rango:</span> <span class="data"><%= @user.role %></span></p>
+    </div>
+  </div>
+  <img src="/image/card.jpg" alt="Imagen de la carta" class="player-image">
+</div>
+
+<div class="menu-button">
+  <button onclick="window.location.href='/menu'">Volver al Menú</button>
+</div>
+
+
