@@ -84,11 +84,6 @@ class App < Sinatra::Application
   end
 
 
-  get '/progress' do
-    erb :progress
-  end
-
-
   post '/suggestion' do
     user_id = session[:user_id]
     @suggestion = Suggestion.find_or_create_by( user_id: params[:user_id],description: params[:description],
@@ -214,8 +209,8 @@ class App < Sinatra::Application
         else
           progress.incorrect_answers += 1
           progress.lose_points += question.cantPoints
-          user.lifes -= 1 
-          user.streak = 0 
+          user.lifes -= 1
+          user.streak = 0
         end
 
         progress.current_question += 1
