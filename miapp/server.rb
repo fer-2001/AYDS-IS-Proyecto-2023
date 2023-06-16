@@ -125,6 +125,16 @@ class App < Sinatra::Application
     redirect '/'
   end
 
+  get '/progress' do
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      @progress = @user.progress
+      erb :progress
+    else
+      redirect '/users' # Redirigir a la página de inicio de sesión si no hay sesión iniciada
+    end
+  end
+
   post '/register' do
     @users = User.find_or_create_by(name: params[:name], pass: params[:pass])
     erb :users

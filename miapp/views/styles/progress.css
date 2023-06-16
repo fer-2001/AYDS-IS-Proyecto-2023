@@ -1,0 +1,112 @@
+/* Estilos generales */
+body {
+    background-image: url("/image/cancha.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .page-title {
+      text-align: center;
+      background-color: lightblue;
+      color: black;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 20px;
+      display: inline-block;
+      position: relative;
+      left: 37.5%;
+  }
+
+  .player-card {
+    width: 300px;
+    background-color: lightblue;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border-color: black;
+    padding: 20px;
+    margin: 0 auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .player-image {
+    display: block;
+    width: 300px;
+    height: auto;
+    margin: 0 auto 20px;
+  }
+
+  .player-name {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    position: absolute;
+    top: 77%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .player-info {
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .player-info p {
+    margin: 5px 0;
+  }
+
+  /* Estilos específicos para los datos del jugador */
+  .player-info .label {
+    font-weight: bold;
+  }
+
+  .player-info .data {
+    color: black;
+  }
+
+  /* Personalización de la disposición */
+  .name-and-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .player-name {
+    margin: 10px 0;
+  }
+
+  .player-image-above-info {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .menu-button {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .menu-button button {
+    padding: 10px 20px;
+    font-size: 20px;
+    background-color: #6ec6ff;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
