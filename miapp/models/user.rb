@@ -1,7 +1,11 @@
 class User < ActiveRecord::Base
   validates_uniqueness_of :name
   validates :name, presence: true
-  validates :pass, presence: true
+  validates :pass, presence: true, format: { with: /\A(?=.*[A-Z])(?=.*\d)/, message: "La contraseña contener al menos una letra mayúscula y un número" }
+  validates :lifes, presence: true
+  validates :streak, presence: true
+  validates :points, presence: true
+  validates :role, presence: true
   has_one :progress
   has_and_belongs_to_many :question
   has_many :suggestions
