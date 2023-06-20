@@ -35,7 +35,7 @@ generate_question('¿Cual es la mayor Racha de invicto que tuvo la escaloneta?',
                     { content: '27', correct: false },
                     { content: '28', correct: false },
                     { content: '36', correct: true }
-                  ], 5, 15, 'El único partido que perdió Argentina fue contra Arabia Saudita')
+                  ], 5, 15, 'La mayor racha fue de 36 partidos. El único partido que perdió Argentina fue contra Arabia Saudita')
 
 generate_question('¿Que fecha la Scaloneta gano la Copa America?', [
                     { content: '10/10/2021', correct: false },
