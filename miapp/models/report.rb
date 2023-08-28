@@ -1,4 +1,4 @@
 class Report < ActiveRecord::Base
-  validates :description, presence: { strict: true }
+  validates :description, presence: true
   belongs_to :user
 end
