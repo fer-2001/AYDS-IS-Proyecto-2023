@@ -206,6 +206,15 @@ class App < Sinatra::Application
           progress.points += question.cantPoints
           user.points += question.cantPoints
           user.streak += 1
+          if user.points > 10 
+            user.update_role('Novato') 
+            if user.points > 50 
+              user.update_role('Finalista') 
+              if user.points > 120
+                user.update_role('Campeon') 
+              end
+            end
+          end
         else
           progress.incorrect_answers += 1
           progress.lose_points += question.cantPoints
