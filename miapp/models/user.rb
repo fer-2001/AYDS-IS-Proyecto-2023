@@ -31,4 +31,14 @@ class User < ActiveRecord::Base
   def role
     ROLES[self[:role].to_sym]
   end
+
+  def update_role(new_role)
+    if ROLES.values.include?(new_role)
+      self.role = new_role
+      save
+      true
+    else
+      false
+    end
+  end
 end
