@@ -3,7 +3,7 @@ require_relative '../../models/question.rb'
 require_relative '../../models/option.rb'
 require_relative '../../models/user.rb'
 
-describe 'Question' do 
+describe Question do 
     describe 'valid' do
         it 'should be invalid if question is missing' do
           q = Question.new(difficult: 1, cantPoints: 10, curiosities: 'Some curiosity')
@@ -44,5 +44,17 @@ describe 'Question' do
             q = Question.new 
             expect(q.options.size).to eq(0)
         end
+
+        it 'has_many_options' do
+            association = described_class.reflect_on_association(:options)
+            expect(association.macro).to eq(:has_many)
+        end
+
+        it 'has_and_belongs_to_many' do
+            association = described_class.reflect_on_association(:users)
+            expect(association.macro).to eq(:has_and_belongs_to_many)
+        end
+
+
     end
 end
