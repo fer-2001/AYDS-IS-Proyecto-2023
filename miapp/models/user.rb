@@ -33,10 +33,13 @@ class User < ActiveRecord::Base
   end
 
    def update_fields(option)
-    self.points += option.question.cantPoints
-    self.streak += 1
-    self.lifes -= 1
-    save!
+    if option.correct
+      self.points += option.question.cantPoints
+      self.streak += 1
+    elsif
+      self.lifes -= 1
+    end
+    save
   end
 
   def update_role
