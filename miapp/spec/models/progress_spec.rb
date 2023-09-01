@@ -2,10 +2,14 @@ require 'sinatra/activerecord'
 require_relative '../../models/progress.rb'
 require_relative '../../models/user.rb'
 require_relative '../../models/option.rb'
+require_relative '../../models/question.rb'
 
-
-describe 'Progress' do
+describe Progress do
     describe 'valid' do 
+      before(:each) do
+        @user = User.create(name: 'test_user', pass: 'Test_pass1')
+      end
+
         describe 'when there is no current_question' do
           it 'should be valid' do
             p = Progress.new
@@ -13,95 +17,80 @@ describe 'Progress' do
           end
         end
 
-        describe 'when there is a new progress, current_questiond = 0' do
+        describe 'when there is a new progress' do
           it 'should be valid' do
             p = Progress.new
-            expect(p.current_question == 0).to be_truthy
-          end
-        end
-
-        describe 'when there is a new progress, correct_answers = 0' do
-          it 'should be valid' do
-            p = Progress.new
-            expect(p.correct_answers == 0).to be_truthy
-          end
-        end
-
-        describe 'when there is a new progress, incorrec_answers = 0' do
-          it 'should be valid' do
-            p = Progress.new
-            expect(p.incorrect_answers == 0).to be_truthy
-          end
-        end
-
-        describe 'when there is a new progress, lose_points = 0' do
-          it 'should be valid' do
-            p = Progress.new
-            expect(p.lose_points == 0).to be_truthy
-          end
-        end
-
-        describe 'when there is a new progress, points = 0' do
-          it 'should be valid' do
-            p = Progress.new
-            expect(p.points == 0).to be_truthy
+                  expect(p.current_question).to eq(0)
+                  expect(p.correct_answers).to eq(0)
+                  expect(p.incorrect_answers).to eq(0)
+                  expect(p.lose_points).to eq(0)
+                  expect(p.points).to eq(0)
           end
         end
 
         describe 'when there is a new progress and 1 correct answer' do
           it 'should be valid' do
-            u = User.new
-            p = Progress.new(user: u)  # Asigna el usuario a la instancia de progreso
-            o = Option.create(content: 's', correct: true)
-            p.check_and_update_progress(u, o)
+            q = Question.create(question: 'Pregunta', cantPoints: 10)
+            o = Option.create(content: 's', correct: true, question: q)
+            p = Progress.new(user: @user)
+            p.update_progress(o, true)
             expect(p.correct_answers).to eq(1)
+            expect(p.points).to eq(10)
           end
         end
 
         describe 'when there is a new progress and 1 incorrect answer' do
           it 'should be valid' do
-            u = User.new
-            p = Progress.new(user: u)  # Asigna el usuario a la instancia de progreso
-            o = Option.create(content: 's', correct: false)
-            p.check_and_update_progress(u, o)
-            expect(p.incorrect_answers).to eq(1)  # Cambiar a "incorrect_answers"
+            p = Progress.new(user: @user)
+            q = Question.create(question: 'Pregunta', cantPoints: 10)
+            o = Option.create(content: 's', correct: false, question: q)
+            p.update_progress(o, false)
+            expect(p.incorrect_answers).to eq(1)
+            expect(p.lose_points).to eq(10)
           end
         end
 
         describe 'when there is a new progress and 1 incorrect answer and 1 correct answer' do
           it 'should be valid' do
-            u = User.new
-            p = Progress.new(user: u)  # Asigna el usuario a la instancia de progreso
-            o = Option.create(content: 's', correct: false)
-            p.check_and_update_progress(u, o)
-            o2 = Option.create(content: 's', correct: true)
-            p.check_and_update_progress(u, o2)
-            expect(p.correct_answers).to eq(1)  
+            p = Progress.new(user: @user)
+            q1 = Question.create(question: 'Pregunta1', cantPoints: 5)
+            q2 = Question.create(question: 'Pregunta2', cantPoints: 10)
+            o1 = Option.create(content: 's', correct: false, question: q1)
+            o2 = Option.create(content: 's', correct: true, question: q2)
+            p.update_progress(o1, false)
+            p.update_progress(o2, true)
+            expect(p.correct_answers).to eq(1)
             expect(p.incorrect_answers).to eq(1)
+            expect(p.points).to eq(10)
+            expect(p.lose_points).to eq(5)
           end
         end
 
         describe 'when there is a new progress and 2 incorrect answer' do
           it 'should be valid' do
-            u = User.new
-            p = Progress.new(user: u)  # Asigna el usuario a la instancia de progreso
-            o = Option.create(content: 's', correct: false)
-            p.check_and_update_progress(u, o)
-            o2 = Option.create(content: 's', correct: false)
-            p.check_and_update_progress(u, o2)
+            p = Progress.new(user: @user)
+            q1 = Question.create(question: 'Pregunta1', cantPoints: 5)
+            q2 = Question.create(question: 'Pregunta2', cantPoints: 10)
+            o1 = Option.create(content: 's', correct: false, question: q1)
+            o2 = Option.create(content: 's', correct: false, question: q2)
+            p.update_progress(o1, false)
+            p.update_progress(o2, false)
             expect(p.incorrect_answers).to eq(2)
+            expect(p.lose_points).to eq(15)
           end
         end
 
         describe 'when there is a new progress and 2 correct answer' do
           it 'should be valid' do
-            u = User.new
-            p = Progress.new(user: u)  # Asigna el usuario a la instancia de progreso
-            o = Option.create(content: 's', correct: true)
-            p.check_and_update_progress(u, o)
-            o2 = Option.create(content: 's', correct: true)
-            p.check_and_update_progress(u, o2)
+            p = Progress.new(user: @user)
+            q1 = Question.create(question: 'Pregunta1', cantPoints: 5)
+            q2 = Question.create(question: 'Pregunta2', cantPoints: 10)
+            o1 = Option.create(content: 's', correct: true, question: q1)
+            o2 = Option.create(content: 's', correct: true, question: q2)
+            p.update_progress(o1, true)
+            p.update_progress(o2, true)
             expect(p.correct_answers).to eq(2)
+            expect(p.points).to eq(15)
           end
         end
     end

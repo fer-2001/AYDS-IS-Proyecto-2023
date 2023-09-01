@@ -32,8 +32,23 @@ class User < ActiveRecord::Base
     ROLES[self[:role].to_sym]
   end
 
-  def update_role(new_role)
-    if ROLES.values.include?(new_role)
+   def update_fields(option)
+    self.points += option.question.cantPoints
+    self.streak += 1
+    self.lifes -= 1
+    save!
+  end
+
+  def update_role
+    if points > 120
+      new_role = 'Campeon'
+    elsif points > 50
+      new_role = 'Finalista'
+    elsif points > 10
+      new_role = 'Novato'
+    end
+
+    if new_role && ROLES.values.include?(new_role)
       self.role = new_role
       save
       true

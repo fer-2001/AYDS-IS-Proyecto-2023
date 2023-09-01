@@ -1,7 +1,7 @@
 require 'sinatra/activerecord'
 require_relative '../../models/init.rb'
 
-describe 'User' do
+describe User do
   describe 'valid' do
     describe 'when there is no name' do
       it 'should be invalid' do
