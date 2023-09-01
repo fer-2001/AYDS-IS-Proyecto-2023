@@ -36,12 +36,6 @@ describe Option do
       op = Option.new(content: nil , correct: true) 
       expect(op.valid?).to eq(false)
     end
-
-    it 'is invalid whithout correct' do 
-      op = Option.new(content: 'si', correct: nil) 
-      expect(op.valid?).to eq(false) 
-    end 
-  
 end
     
 

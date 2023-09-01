@@ -3,5 +3,4 @@ class Option < ActiveRecord::Base
   has_many :responses
   has_many :users, through: :responses
   validates :content, presence: true  
-  validates :correct, presence: true
 end
