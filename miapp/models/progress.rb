@@ -1,13 +1,16 @@
 class Progress < ActiveRecord::Base
   belongs_to :user
 
-  def check_and_update_progress(user, selected_option)
-    if selected_option.correct
-      user.progress.correct_answers += 1
-      user.progress.points += 1
+  def update_progress(option, is_correct)
+    if is_correct
+      self.correct_answers += 1
+      self.points += option.question.cantPoints
     else
-      user.progress.incorrect_answers += 1
-      user.progress.lose_points += 1
+      self.incorrect_answers += 1
+      self.lose_points += option.question.cantPoints
     end
+
+    self.current_question += 1
+    save!
   end
 end

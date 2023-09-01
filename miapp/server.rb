@@ -201,30 +201,14 @@ class App < Sinatra::Application
        # Obtener el progreso del usuario
       if progress
         question = option.question
-        if is_correct
-          progress.correct_answers += 1
-          progress.points += question.cantPoints
-          user.points += question.cantPoints
-          user.streak += 1
-          if user.points > 10 
-            user.update_role('Novato') 
-            if user.points > 50 
-              user.update_role('Finalista') 
-              if user.points > 120
-                user.update_role('Campeon') 
-              end
-            end
-          end
-        else
-          progress.incorrect_answers += 1
-          progress.lose_points += question.cantPoints
-          user.lifes -= 1
-          user.streak = 0
-        end
+        is_correct = option.correct
+        Response.create(user_id: user_id, option_id: option_id)
 
-        progress.current_question += 1
-        user.save!
-        progress.save!
+        progress = Progress.find_or_create_by(user_id: user_id)
+
+        progress.update_progress(option, is_correct)
+        user.update_fields(option)
+        user.update_role
       end
 
       if is_correct
@@ -233,7 +217,5 @@ class App < Sinatra::Application
         'Respuesta incorrecta'
       end
     end
-
-
   end
 end
