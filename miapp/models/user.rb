@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates :points, presence: true
   validates :role, presence: true
   has_one :progress
+  has_one :leadearboard
   has_and_belongs_to_many :question
   has_many :suggestions
   has_many :reports
