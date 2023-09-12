@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_18_014432) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_12_151816) do
+  create_table "leadearboards", force: :cascade do |t|
+    t.integer "rank"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "options", force: :cascade do |t|
     t.integer "question_id"
     t.string "content"
