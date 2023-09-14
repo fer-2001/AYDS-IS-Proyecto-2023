@@ -1,0 +1,76 @@
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-image: url("/image/menuFront.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  h1 {
+    text-align: center;
+    color: #000;
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    margin-bottom: 10px;
+  }
+  .button {
+    background-color: #4caeae;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .button a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    background-color: #000000;
+    color: #fff;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  .button a:hover {
+    background-color: #ffb620;
+  }
+  .button input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #000000;
+    color: #fff;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  .button input[type="submit"]:hover {
+    background-color: #ffb620;;
+  }
+
+  .logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 800px;
+    width: 100%;
+  }
+
+
