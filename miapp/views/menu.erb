@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="icon" href="/image/icon.png"/>
+    <link rel="icon" href="/image/icon.png"/>
     <link rel="stylesheet" href="styles/menu.css"/>
-  <title>Menú</title>
+    <link rel="stylesheet" href="styles/custom.css"/> 
+    <title>Menú</title>
 </head>
 <body>
-  <div class="container">
-    <ul>
-      <li class="button"><a href="/questions">Jugar</a></li>
-      <li class="button"><a href="/progress">Progreso</a></li>
-      <li class="button"><a href="/reports">Reporte</a></li>
-      <li class="button"><a href="/suggestion">Sugerencia</a></li>
-      <li class="button">
-        <form action="/logout" method="post">
-          <input type="submit" value="Cerrar sesión">
-        </form>
-      </li>
-    </ul>
-  </div>
-    <div class="barra-Menu"> 
-     <p><span class="label">Vidas:</span> <span class="data"><%= @user.lifes%></span></p>
-      <p><span class="label">Monedas:</span> <span class="data"><%= @progress.correct_answers %></span></p>
+    <div class="container">
+        <ul>
+            <li class="button"><a href="/questions">Jugar</a></li>
+            <li class="button"><a href="/progress">Progreso</a></li>
+            <li class="button"><a href="/reports">Reporte</a></li>
+            <li class="button"><a href="/suggestion">Sugerencia</a></li>
+            <li class="button">
+                <form action="/logout" method="post">
+                    <input type="submit" value="Cerrar sesión">
+                </form>
+            </li>
+        </ul>
+    </div>
+    <div class="player-stats">
+        <div class="datos-Usuario">
+            <p><span class="label">Usuario:</span> <span class="data"><%= @user.name %></span></p>
+        </div>
+        <div class="Corazones">
+            <img src="/image/corazon.png" alt="Vidas" class="stat-icon">
+            <p><span class="label">Vidas:</span> <span class="data"><%= @user.lifes %></span></p>
+        </div>
+        <div class="Monedas">
+            <img src="/image/moneda.png" alt="Monedas" class="stat-icon">
+            <p><span class="label">Monedas:</span> <span class="data"><%= @user.lifes %></span></p> <!-- Cuando tengamos monedas va: user.coins-->
+        </div>
     </div>
 </body>
 </html>

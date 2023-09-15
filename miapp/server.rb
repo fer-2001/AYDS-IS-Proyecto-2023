@@ -137,7 +137,6 @@ class App < Sinatra::Application
 
   get '/menu' do
     @user = User.find(session[:user_id])
-    @progress = @user.progress
     erb :menu
   end
 
