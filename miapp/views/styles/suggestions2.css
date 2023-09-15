@@ -1,23 +1,31 @@
-  
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-size: cover;
-    background: linear-gradient(
-        135deg,
-        rgba(135, 206, 250, 0.8) 0%,
-        hsla(203, 92%, 75%, 0.8) 25%,
-        rgba(255, 255, 255, 0.8) 25%,
-        rgba(255, 255, 255, 0.8) 50%,
-        rgba(135, 206, 250, 0.8) 50%,
-        rgba(135, 206, 250, 0.8) 75%,
-        rgba(255, 255, 255, 0.8) 75%,
-        rgba(255, 255, 255, 0.8) 100%
-      );
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+html {
+  height: 100%; 
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100%; 
+  background: linear-gradient(
+    135deg,
+    rgba(135, 206, 250, 0.8) 0%,
+    hsla(203, 92%, 75%, 0.8) 25%,
+    rgba(255, 255, 255, 0.8) 25%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(135, 206, 250, 0.8) 50%,
+    rgba(135, 206, 250, 0.8) 75%,
+    rgba(255, 255, 255, 0.8) 75%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.content {
+  padding: 20px; 
+}
   
     .container {
     position: sticky;
@@ -60,8 +68,8 @@
   .btn-container button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: hsl(180, 39%, 49%);
-    color: hsl(0, 0%, 0%);
+    background-color: #000000;
+    color: hsl(0, 0%, 100%);
     font-size: 18px;
     text-decoration: none;
     border-radius: 5px;
@@ -73,7 +81,7 @@
   }
   
   .btn-container button:hover {
-    background-color: #45a049;
+    background-color: #ffb620;
   }
   
   
@@ -90,9 +98,10 @@
 }
 
 .btn-back button {
+  display: inline-block;
   padding: 10px 20px;
-  background-color: hsl(180, 39%, 49%);
-  color: hsl(0, 0%, 0%);
+  background-color: hsl(0, 0%, 0%);
+  color: hsl(0, 0%, 100%);
   font-size: 18px;
   text-decoration: none;
   border-radius: 5px;
@@ -100,7 +109,7 @@
 }
 
 .btn-back button:hover {
-  background-color: #45a049;
+  background-color: #ffb620;
 }
 
 

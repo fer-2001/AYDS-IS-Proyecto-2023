@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LeaderBoard</title>
+  <link rel="stylesheet" type="text/css" href="styles/leaderboard.css">
+</head>
+<body>
+  <div class="content">
+    <h1>LeaderBoard</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Puntos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @datos.each do |dato| %>
+          <tr>
+            <td><%= dato.name %></td>
+            <td><%= dato.points %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <a href="/menu"  class="button-below-table">Volver al Menú</a>
+  </div>
+</body>
+</html>
