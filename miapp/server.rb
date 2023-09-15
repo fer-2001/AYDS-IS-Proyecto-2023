@@ -136,6 +136,7 @@ class App < Sinatra::Application
   end
 
   get '/menu' do
+    @user = User.find(session[:user_id])
     erb :menu
   end
 
