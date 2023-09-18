@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
     if option.correct
       self.points += option.question.cantPoints
       self.streak += 1
+      self.coins +=5
     elsif
       self.lifes -= 1
     end
