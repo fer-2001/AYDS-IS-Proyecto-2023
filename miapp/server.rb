@@ -14,6 +14,7 @@ require_relative 'models/progress'
 require_relative 'models/suggestion'
 require_relative 'models/option'
 require_relative 'models/response'
+require_relative 'models/leaderboard'
 
 class App < Sinatra::Application
   def initialize(_app = nil)
@@ -219,4 +220,11 @@ class App < Sinatra::Application
       end
     end
   end
+
+  get '/leaderboard' do
+    @datos = User.order(points: :desc).limit(5) 
+    erb :leaderboard
+  end
+
+
 end
