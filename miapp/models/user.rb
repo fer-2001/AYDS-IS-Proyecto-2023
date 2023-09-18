@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :pass, presence: true, format: { with: /\A(?=.*[A-Z])(?=.*\d)/, message: "La contraseña contener al menos una letra mayúscula y un número" }
   validates :lifes, presence: true
+  validates :lifes, numericality: { less_than_or_equal_to: 5, greater_than_or_equal_to: 0 } 
   validates :streak, presence: true
   validates :points, presence: true
   validates :role, presence: true
@@ -29,6 +30,10 @@ class User < ActiveRecord::Base
     self[:role] = ROLES.key(value.to_s).to_s
   end
 
+  def check_lifes
+    lifes == 0
+  end
+
   def role
     ROLES[self[:role].to_sym]
   end
@@ -38,6 +43,7 @@ class User < ActiveRecord::Base
       self.points += option.question.cantPoints
       self.streak += 1
       self.coins +=5
+      self.lifes += 1 
     elsif
       self.lifes -= 1
     end
