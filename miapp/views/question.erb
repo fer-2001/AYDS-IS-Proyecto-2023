@@ -169,6 +169,7 @@
         }
       });
 
+      verificarVidasRestantes(); 
       preguntaActual++;
       localStorage.setItem('preguntaActual', preguntaActual);
 
@@ -179,6 +180,23 @@
         location.href = '/end_game';
       }
     }
+
+    function verificarVidasRestantes() {
+      $.ajax({
+        url: '/check_lifes', 
+        method: 'GET',
+        success: function(response) {
+          if (response.lifes === 0) {
+            location.href = '/lifes';
+          } 
+        },
+        error: function(error) {
+          console.log('Error al verificar las vidas restantes: ' + error);
+        }
+      });
+    }
+
+    
 
     function regresarMenu() {
       // Guardar la pregunta actual en la sesión
