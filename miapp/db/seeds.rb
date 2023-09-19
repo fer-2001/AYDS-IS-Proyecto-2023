@@ -1,7 +1,13 @@
 # Método para generar preguntas y opciones asociadas
+require_relative '../models/card'
+
 def generate_question(content, options, difficulty, points, curiosity)
   question = Question.create(question: content, difficult: difficulty, cantPoints: points, curiosities: curiosity)
   question.options.create(options)
+end
+
+def generate_card(name, position, price, available)
+  card = Card.create(name: name, position: position, price: price, available: available)
 end
 
 Question.destroy_all
@@ -74,3 +80,6 @@ generate_question('¿Cuantos años tenia Scaloni durante el mundial 2022?', [
                   44 años por lo cual es el director técnico más joven de la Copa del Mundo 2022')
 
 
+generate_card("Messi", "10",10, true)
+generate_card("Dibala", "21",10, true)
+generate_card("Romero", "4",10, true)
