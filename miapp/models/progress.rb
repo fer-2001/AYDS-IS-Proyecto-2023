@@ -1,5 +1,6 @@
 class Progress < ActiveRecord::Base
   belongs_to :user
+  has_many :cards
 
   def update_progress(option, is_correct)
     if is_correct

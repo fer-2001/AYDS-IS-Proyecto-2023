@@ -13,7 +13,9 @@ class User < ActiveRecord::Base
   has_many :suggestions
   has_many :reports
   has_many :responses
-  has_many :options, through: :responses
+  has_many :options, through: :responsescard
+  has_many :cards
+
   
   ROLES = {
     clasificado: 'Clasificado',
@@ -42,8 +44,10 @@ class User < ActiveRecord::Base
     if option.correct
       self.points += option.question.cantPoints
       self.streak += 1
-      self.coins +=5
-      self.lifes += 1 
+      self.coins += 5
+      if self.lifes<5
+        self.lifes += 1 
+      end
     elsif
       self.lifes -= 1
     end
@@ -65,6 +69,12 @@ class User < ActiveRecord::Base
       true
     else
       false
+    end
+  end
+
+  def buy_card(card)
+    if self.coins >= card.price && card.available
+      self.card_id = card.id
     end
   end
 end

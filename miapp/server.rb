@@ -177,6 +177,11 @@ class App < Sinatra::Application
     erb :lifes
   end
   
+  get '/card' do
+    user1 = User.find(session[:user_id])
+    user1.buy_card(1)
+    user1.buy_card(2)
+  end
 
   post '/responses' do
     request_body = JSON.parse(request.body.read)
@@ -248,6 +253,5 @@ class App < Sinatra::Application
     @datos = User.order(points: :desc).limit(5) 
     erb :leaderboard
   end
-
 
 end
