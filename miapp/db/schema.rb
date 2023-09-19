@@ -16,6 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_144615) do
     t.string "position"
     t.integer "price", default: 10
     t.boolean "available", default: true
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -92,7 +93,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_144615) do
     t.integer "streak", default: 0
     t.integer "coins", default: 0
     t.string "role", default: "clasificado"
-    t.integer "card_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

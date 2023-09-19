@@ -14,7 +14,8 @@ require_relative 'models/progress'
 require_relative 'models/suggestion'
 require_relative 'models/option'
 require_relative 'models/response'
-require_relative 'models/leaderboard'
+require_relative 'models/card'
+
 
 class App < Sinatra::Application
   def initialize(_app = nil)
@@ -144,6 +145,47 @@ class App < Sinatra::Application
     erb :menu
   end
 
+  get '/store' do
+    @user = User.find(session[:user_id])
+    @cards = Card.all
+
+    # Verificamos si se ha enviado un parámetro card_id (por ejemplo, desde un formulario de compra)
+    if params[:card_id]
+      card = Card.find(params[:card_id])
+      if @user.buy_card(card)
+        redirect '/menu', notice: '¡Compra exitosa!'
+      else
+        redirect '/store', error: 'No se pudo comprar la carta.'
+      end
+    end
+
+    erb :store
+  end
+
+  # Ruta para comprar una carta
+  post '/buy_card/:card_id' do
+    @user = User.find(session[:user_id])
+    card_id = params[:card_id]
+    card = Card.find(card_id)
+    
+    if @user.buy_card(card)
+      redirect '/menu', notice: '¡Compra exitosa!'
+    else
+      redirect '/store', error: 'No se pudo comprar la carta.'
+    end
+  end
+
+
+
+  get '/questions' do
+    @user = User.find(session[:user_id])
+    if (@user.check_lifes)
+      erb :lifes
+    else
+      @questions = Question.all
+      erb :question
+    end
+  end
   get '/questions' do
     @user = User.find(session[:user_id])
     if (@user.check_lifes)
@@ -177,11 +219,6 @@ class App < Sinatra::Application
     erb :lifes
   end
   
-  get '/card' do
-    user1 = User.find(session[:user_id])
-    user1.buy_card(1)
-    user1.buy_card(2)
-  end
 
   post '/responses' do
     request_body = JSON.parse(request.body.read)

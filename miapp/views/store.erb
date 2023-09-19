@@ -1,0 +1,26 @@
+<!-- views/store.erb -->
+
+<h1>Tienda de Cartas</h1>
+
+<p>Bienvenido, <%= @user.name %>! Tienes <%= @user.coins %> monedas.</p>
+
+<ul>
+  <% @cards.each do |card| %>
+    <li>
+      <strong><%= card.name %></strong> - Posición: <%= card.position %> - Precio: <%= card.price %> monedas
+      <% if card.available && @user.coins >= card.price %>
+        <form action="/buy_card/<%= card.id %>" method="POST">
+          <input type="hidden" name="card_id" value="<%= card.id %>"> <!-- Campo oculto para almacenar el card_id -->
+          <input type="submit" value="Comprar">
+        </form>
+      <% elsif !card.available %>
+        (Ya comprada)
+      <% else %>
+        (No tienes suficientes monedas)
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<a href="/">Volver al inicio</a>
+

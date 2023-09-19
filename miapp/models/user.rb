@@ -74,7 +74,12 @@ class User < ActiveRecord::Base
 
   def buy_card(card)
     if self.coins >= card.price && card.available
-      self.card_id = card.id
+      self.coins -= card.price
+      card.update(available: false, user_id: self.id)
+      save
+      return true  # La compra fue exitosa
+    else
+      return false  # No se pudo comprar la carta
     end
   end
 end

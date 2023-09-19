@@ -5,6 +5,7 @@ class CreateCards < ActiveRecord::Migration[7.0]
       t.string :position  
       t.integer :price, default: 10
       t.boolean :available, default: true
+      t.integer :user_id
       t.timestamps
     end
   end

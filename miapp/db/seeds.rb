@@ -19,7 +19,7 @@ generate_question('¿Cuántos goles marcó Lionel Messi durante el Mundial 2022?
                     { content: '5', correct: false },
                     { content: '3', correct: false },
                     #{Messi metio 7 goles en el mundial 2022, salio 2do mayor goleador del mundial}
-                  ], 3, 10, 'Messi salio 2do mayor goleador del mundial 2022 jugado en Qatar')
+                  ], 3, 15, 'Messi salio 2do mayor goleador del mundial 2022 jugado en Qatar')
 
 generate_question('¿Cuál fue el resultado del partido de Argentina contra Francia en la final del mundial 2022?', [
                     { content: 'Empate 3-3', correct: true },
