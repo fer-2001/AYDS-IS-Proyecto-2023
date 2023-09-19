@@ -121,8 +121,9 @@ class App < Sinatra::Application
     redirect '/'
   end
 
-  
-  
+  get '/lifes' do
+    erb :lifes
+  end
 
   get '/progress' do
     if session[:user_id]
@@ -147,7 +148,7 @@ class App < Sinatra::Application
   get '/questions' do
     @user = User.find(session[:user_id])
     if (@user.check_lifes)
-      erb :lifes
+      redirect '/lifes'
     else
       @questions = Question.all
       erb :question
