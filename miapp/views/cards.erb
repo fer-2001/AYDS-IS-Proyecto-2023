@@ -1,0 +1,16 @@
+<!-- views/cards.erb -->
+<h1>Mis Cartas</h1>
+
+<ul>
+  <% @user.cards.each do |card| %>
+    <li>
+      <strong><%= card.name %></strong>
+      <form action="/use_card" method="post">
+        <input type="hidden" name="card_name" value="<%= card.name %>">
+        <button class="use-card-button" type="submit">Usar</button>
+      </form>
+    </li>
+  <% end %>
+</ul>
+
+<a href="/menu">Volver al Menú</a>

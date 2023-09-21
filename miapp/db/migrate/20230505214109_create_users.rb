@@ -7,8 +7,8 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.integer :points, default: 0
       t.integer :streak, default: 0
       t.integer :coins, default: 0
+      t.string :card, default: 'card'
       t.string :role, default: 'clasificado'
-      t.integer :card_id
       t.timestamps
     end
   end

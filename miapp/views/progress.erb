@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="/styles/progress.css"/>
+<link rel="stylesheet" href="/styles/progress.css" />
 <h1 class="page-title">Este es tu Progreso:</h1>
 <div class="player-card">
   <div class="name-and-info">
@@ -16,11 +16,13 @@
       <p><span class="label">Rango:</span> <span class="data"><%= @user.role %></span></p>
     </div>
   </div>
-  <img src="/image/card.jpg" alt="Imagen de la carta" class="player-image">
+  <!-- Agrega un elemento div con un ID para actualizar la imagen con JavaScript -->
+  <div id="player-card-image-container">
+    <img src="<%= @user.card_image_url %>" alt="Imagen de la carta" class="player-image" id="player-card-image">
+  </div>
 </div>
 
 <div class="menu-button">
   <button onclick="window.location.href='/menu'">Volver al Menú</button>
 </div>
-
-
+</html>

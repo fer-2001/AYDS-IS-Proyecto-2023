@@ -1,0 +1,41 @@
+<!-- views/store.erb -->
+
+<h1>Tienda de Cartas</h1>
+
+<div id="coins-section" style="position: absolute; top: 10px; right: 10px;">
+  Tienes <%= @user.coins %> monedas.
+</div>
+
+<ul>
+  <% (1..13).each do |card_number| %>
+    <% card_name = 
+      case card_number
+        when 1 then "Messi"
+        when 2 then "Dibala"
+        when 3 then "Romero"
+        when 4 then "Martinez"
+        when 5 then "Molina"
+        when 6 then "Otamendi"
+        when 7 then "Tagliafico"
+        when 8 then "Fernandez"
+        when 9 then "De Paul"
+        when 10 then "Mac Allister"
+        when 11 then "Di Maria"
+        when 12 then "Alvarez"
+        when 13 then "Scaloni"
+      end
+    %>
+    <% card = Card.find_by(name: card_name) %>
+
+    <li>
+      <strong><%= card.name %></strong> - Posición: <%= card.position %> - Precio: <%= card.price %> monedas
+      <form action="/buy_card/<%= card.id %>" method="POST">
+        <input type="submit" value="Comprar">
+      </form>
+
+
+    </li>
+  <% end %>
+</ul>
+
+<a href="/">Volver al inicio</a>
