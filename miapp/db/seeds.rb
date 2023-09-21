@@ -10,6 +10,7 @@ def generate_card(name, position, price, available)
   card = Card.create(name: name, position: position, price: price, available: available)
 end
 
+Card.destroy_all
 Question.destroy_all
 
 # Generar preguntas sobre la selección argentina en el Mundial 2022
@@ -82,4 +83,14 @@ generate_question('¿Cuantos años tenia Scaloni durante el mundial 2022?', [
 
 generate_card("Messi", "10",10, true)
 generate_card("Dibala", "21",10, true)
-generate_card("Romero", "4",10, true)
+generate_card("Romero", "13",10, true)
+generate_card("Martinez", "23",10, true)
+generate_card("Molina", "26",10, true)
+generate_card("Otamendi", "19",10, true)
+generate_card("Tagliafico", "8",10, true)
+generate_card("Fernandez", "24",10, true)
+generate_card("De Paul", "7",10, true)
+generate_card("Mac Allister", "20",10, true)
+generate_card("Di Maria", "11",10, true)
+generate_card("Alvarez", "9",10, true)
+generate_card("Scaloni", "0",10, true)

@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_19_144615) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_21_152223) do
   create_table "cards", force: :cascade do |t|
     t.string "name"
-    t.string "position"
+    t.integer "position"
     t.integer "price", default: 10
     t.boolean "available", default: true
     t.integer "user_id"
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_144615) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "leadearboards", force: :cascade do |t|
+  create_table "leaderboards", force: :cascade do |t|
     t.integer "rank"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -92,6 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_144615) do
     t.integer "points", default: 0
     t.integer "streak", default: 0
     t.integer "coins", default: 0
+    t.string "card", default: "card"
     t.string "role", default: "clasificado"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
