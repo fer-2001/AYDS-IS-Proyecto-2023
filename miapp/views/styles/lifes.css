@@ -1,0 +1,51 @@
+body {
+    background-image: url('/image/f4.jpeg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+}
+
+.mensaje {
+    background-color: hsla(0, 7%, 94%, 0);
+    color:aliceblue; 
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    position: absolute;
+    top: -100px;
+    right:100px;
+    text-align: left; 
+    margin: 20% auto;
+    font-family: "Playfair Display", serif;
+}
+
+.mensaje img {
+    width: 36px; 
+    height: 36px;
+    margin-right: 10px;
+}       
+
+h1 {
+    color: #ffb620;
+}
+
+.boton-menu {
+    display: inline-block; 
+    margin-top: 20px;
+    text-decoration: none;
+    background-color: rgb(3, 10, 6); 
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s ease; 
+}
+
+.boton-menu:hover {
+    background-color: #ffb620;
+}
