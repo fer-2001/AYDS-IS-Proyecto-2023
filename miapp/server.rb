@@ -122,12 +122,9 @@ class App < Sinatra::Application
     redirect '/'
   end
 
-<<<<<<< Updated upstream
   get '/lifes' do
     erb :lifes
   end
-=======
->>>>>>> Stashed changes
 
 # Ruta para mostrar el progreso del usuario con la carta seleccionada
   get '/progress' do

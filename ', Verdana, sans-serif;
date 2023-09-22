@@ -1,0 +1,275 @@
+warning: LF will be replaced by CRLF in miapp/db/schema.rb.
+The file will have its original line endings in your working directory
+[1mdiff --git a/miapp/server.rb b/miapp/server.rb[m
+[1mindex 9b4af32..dd88b4c 100644[m
+[1m--- a/miapp/server.rb[m
+[1m+++ b/miapp/server.rb[m
+[36m@@ -122,12 +122,9 @@[m [mclass App < Sinatra::Application[m
+     redirect '/'[m
+   end[m
+ [m
+[31m-<<<<<<< Updated upstream[m
+   get '/lifes' do[m
+     erb :lifes[m
+   end[m
+[31m-=======[m
+[31m->>>>>>> Stashed changes[m
+ [m
+ # Ruta para mostrar el progreso del usuario con la carta seleccionada[m
+   get '/progress' do[m
+[1mdiff --git a/miapp/views/image/carta1.jpg b/miapp/views/image/carta1.jpg[m
+[1mdeleted file mode 100644[m
+[1mindex 40be494..0000000[m
+Binary files a/miapp/views/image/carta1.jpg and /dev/null differ
+[1mdiff --git a/miapp/views/image/carta10.jpg b/miapp/views/image/carta10.jpg[m
+[1mdeleted file mode 100644[m
+[1mindex 9da2a2a..0000000[m
+Binary files a/miapp/views/image/carta10.jpg and /dev/null differ
+[1mdiff --git a/miapp/views/image/carta11.jpg b/miapp/views/image/carta11.jpg[m
+[1mdeleted file mode 100644[m
+[1mindex 01a9cef..0000000[m
+Binary files a/miapp/views/image/carta11.jpg and /dev/null differ
+[1mdiff --git a/miapp/views/image/carta12.jpg b/miapp/views/image/carta12.jpg[m
+[1mdeleted file mode 100644[m
+[1mindex 2099d11..0000000[m
+Binary files a/miapp/views/image/carta12.jpg and /dev/null differ
+[1mdiff --git a/miapp/views/image/carta13.jpg b/miapp/views/image/carta13.jpg[m
+[1mdeleted file mode 100644[m
+[1mindex e69e97b..0000000[m
+Binary files a/miapp/views/image/carta13.jpg and /dev/null differ
+[1mdiff --git a/miapp/views/image/carta2.jpg b/miapp/views/image/carta2.jpg[m
+[1mdeleted file mode 100644[m
+[1mindex 0ef72e3..0000000[m
+Binary files a/miapp/views/image/carta2.jpg and /dev/null differ
+[1mdiff --git a/miapp/views/image/carta3.jpg b/miapp/views/image/carta3.jpg[m
+[1mdeleted file mode 100644[m
+[1mindex d0a62eb..0000000[m
+Binary files a/miapp/views/image/carta3.jpg and /dev/null differ
+[1mdiff --git a/miapp/views/image/carta4.jpg b/miapp/views/image/carta4.jpg[m
+[1mdeleted file mode 100644[m
+[1mindex 1094ae4..0000000[m
+Binary files a/miapp/views/image/carta4.jpg and /dev/null differ
+[1mdiff --git a/miapp/views/image/carta5.jpg b/miapp/views/image/carta5.jpg[m
+[1mdeleted file mode 100644[m
+[1mindex f06e87b..0000000[m
+Binary files a/miapp/views/image/carta5.jpg and /dev/null differ
+[1mdiff --git a/miapp/views/image/carta6.jpg b/miapp/views/image/carta6.jpg[m
+[1mdeleted file mode 100644[m
+[1mindex 2adc6b5..0000000[m
+Binary files a/miapp/views/image/carta6.jpg and /dev/null differ
+[1mdiff --git a/miapp/views/image/carta7.jpg b/miapp/views/image/carta7.jpg[m
+[1mdeleted file mode 100644[m
+[1mindex 2b76d73..0000000[m
+Binary files a/miapp/views/image/carta7.jpg and /dev/null differ
+[1mdiff --git a/miapp/views/image/carta8.jpg b/miapp/views/image/carta8.jpg[m
+[1mdeleted file mode 100644[m
+[1mindex 64c0bac..0000000[m
+Binary files a/miapp/views/image/carta8.jpg and /dev/null differ
+[1mdiff --git a/miapp/views/image/carta9.jpg b/miapp/views/image/carta9.jpg[m
+[1mdeleted file mode 100644[m
+[1mindex fc7c007..0000000[m
+Binary files a/miapp/views/image/carta9.jpg and /dev/null differ
+[1mdiff --git a/miapp/views/menu.erb b/miapp/views/menu.erb[m
+[1mindex 9c572af..619bc00 100644[m
+[1m--- a/miapp/views/menu.erb[m
+[1m+++ b/miapp/views/menu.erb[m
+[36m@@ -2,7 +2,7 @@[m
+ <html>[m
+ <head>[m
+     <link rel="icon" href="/image/icon.png"/>[m
+[31m-    <link rel="stylesheet" href="styles/menu2.css"/>[m
+[32m+[m[32m    <link rel="stylesheet" href="styles/menu3.css"/>[m
+     <title>Menú</title>[m
+ </head>[m
+ <body>[m
+[1mdiff --git a/miapp/views/store.erb b/miapp/views/store.erb[m
+[1mindex ab5fe2f..ea500cb 100644[m
+[1m--- a/miapp/views/store.erb[m
+[1m+++ b/miapp/views/store.erb[m
+[36m@@ -1,12 +1,14 @@[m
+[31m-<!-- views/store.erb -->[m
+[32m+[m[32m<head>[m
+[32m+[m[32m    <link rel="icon" href="/image/icon.png"/>[m
+[32m+[m[32m    <link rel="stylesheet" href="styles/store.css"/>[m
+[32m+[m[32m    <title>Tienda</title>[m
+[32m+[m[32m</head>[m
+ [m
+[31m-<h1>Tienda de Cartas</h1>[m
+[31m-[m
+[31m-<div id="coins-section" style="position: absolute; top: 10px; right: 10px;">[m
+[31m-  Tienes <%= @user.coins %> monedas.[m
+[32m+[m[32m<div class="header-container">[m
+[32m+[m[32m        <h1>Tienda de Cartas</h1>[m
+ </div>[m
+ [m
+[31m-<ul>[m
+[32m+[m[32m<ul class="card-list">[m
+   <% (1..13).each do |card_number| %>[m
+     <% card_name = [m
+       case card_number[m
+[36m@@ -27,15 +29,23 @@[m
+     %>[m
+     <% card = Card.find_by(name: card_name) %>[m
+ [m
+[31m-    <li>[m
+[32m+[m[32m    <li class="card-item">[m
+[32m+[m[32m      <div class="card-image" style="background-image: url('/image/cartas/<%= card_number %>.jpg');"></div>[m
+       <strong><%= card.name %></strong> - Posición: <%= card.position %> - Precio: <%= card.price %> monedas[m
+       <form action="/buy_card/<%= card.id %>" method="POST">[m
+         <input type="submit" value="Comprar">[m
+       </form>[m
+[31m-[m
+[31m-[m
+     </li>[m
+   <% end %>[m
+ </ul>[m
+ [m
+[31m-<a href="/">Volver al inicio</a>[m
+[32m+[m[32m    <div class="player-stats">[m
+[32m+[m[32m        <div class="Monedas">[m
+[32m+[m[32m            <img src="/image/moneda.png" alt="Monedas" class="stat-icon">[m
+[32m+[m[32m            <p><span class="label">Monedas:</span> <span class="data"><%= @user.coins %></span></p>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m    </div>[m
+[32m+[m
+[32m+[m
+[32m+[m[32m<li class="button"><a href="/menu">Volver al inicio</a></li>[m
+[41m+[m
+[1mdiff --git a/miapp/views/styles/menu2.css b/miapp/views/styles/menu2.css[m
+[1mdeleted file mode 100644[m
+[1mindex f2b1a16..0000000[m
+[1m--- a/miapp/views/styles/menu2.css[m
+[1m+++ /dev/null[m
+[36m@@ -1,132 +0,0 @@[m
+[31m-body {[m
+[31m-  display: flex;[m
+[31m-  justify-content: center;[m
+[31m-  align-items: center;[m
+[31m-  height: 100vh;[m
+[31m-  font-family: Arial, sans-serif;[m
+[31m-  background-image: url("/image/menuFront.jpg");[m
+[31m-  background-size: cover;[m
+[31m-  background-position: center;[m
+[31m-  background-repeat: no-repeat;[m
+[31m-}[m
+[31m-[m
+[31m-.container {[m
+[31m-  background-color: rgba(255, 255, 255, 0.5); [m
+[31m-  padding: 20px;[m
+[31m-  width: 200px;[m
+[31m-  height: 370px; [m
+[31m-  border-radius: 10px;[m
+[31m-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);[m
+[31m-  text-align: center;[m
+[31m-}[m
+[31m-[m
+[31m-h1 {[m
+[31m-  text-align: center;[m
+[31m-  color: #000;[m
+[31m-  font-size: 32px;[m
+[31m-  margin-bottom: 20px;[m
+[31m-  text-transform: uppercase;[m
+[31m-}[m
+[31m-[m
+[31m-ul {[m
+[31m-  list-style-type: none;[m
+[31m-  padding: 0;[m
+[31m-  margin: 0;[m
+[31m-}[m
+[31m-[m
+[31m-li {[m
+[31m-  margin-bottom: 10px;[m
+[31m-}[m
+[31m-[m
+[31m-.button {[m
+[31m-  overflow: hidden;[m
+[31m-}[m
+[31m-[m
+[31m-.button a {[m
+[31m-  display: block;[m
+[31m-  padding: 10px;[m
+[31m-  margin-bottom: 20px;[m
+[31m-  text-decoration: none;[m
+[31m-  background-color: #000000;[m
+[31m-  color: #fff;[m
+[31m-  text-align: center;[m
+[31m-  transition: background-color 0.3s ease;[m
+[31m-  border-radius: 20px; [m
+[31m-}[m
+[31m-[m
+[31m-.button input[type="submit"] {[m
+[31m-  display: block;[m
+[31m-  width: 100%;[m
+[31m-  padding: 10px;[m
+[31m-  border: none;[m
+[31m-  background-color: #000000;[m
+[31m-  color: #fff;[m
+[31m-  text-align: center;[m
+[31m-  transition: background-color 0.3s ease;[m
+[31m-  cursor: pointer;[m
+[31m-  border-radius: 20px; [m
+[31m-}[m
+[31m-[m
+[31m-.button a:hover {[m
+[31m-  background-color: #ffb620;[m
+[31m-}[m
+[31m-[m
+[31m-.button input[type="submit"]:hover {[m
+[31m-  background-color: #ffb620;[m
+[31m-}[m
+[31m-[m
+[31m-[m
+[31m-.logo {[m
+[31m-  display: block;[m
+[31m-  margin: 0 auto;[m
+[31m-  max-width: 800px;[m
+[31m-  width: 100%;[m
+[31m-}[m
+[31m-[m
+[31m-.player-stats {[m
+[31m-  position: absolute;[m
+[31m-  top: 20px;[m
+[31m-  right: 20px;[m
+[31m-  display: flex;[m
+[31m-}[m
+[31m-[m
+[31m-.Corazones, .Monedas {[m
+[31m-  display: flex;[m
+[31m-  align-items: center;[m
+[31m-  margin-left: 20px;[m
+[31m-}[m
+[31m-[m
+[31m-.stat-icon {[m
+[31m-  width: 24px;[m
+[31m-  height: 24px;[m
+[31m-  margin-right: 5px;[m
+[31m-}[m
+[31m-[m
+[31m-body, p {[m
+[31m-  font-family: 'Arial', sans-serif;[m
+[31m-}[m
+[31m-[m
+[31m-.player-stats {[m
+[31m-  display: flex;[m
+[31m-  justify-content: space-between;[m
+[31m-  padding: 10px;[m
+[31m-  background-color: rgba(255, 255, 255, 0.5);[m
+[31m-  border-radius: 10px;[m
+[31m-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);[m
+[31m-  position: absolute;[m
+[31m-  top: 20px;[m
+[31m-  right: 20px;[m
+[31m-  align-items: center;[m
+[31m-}[m
+[31m-[m
+[31m-.datos-Usuario, .Corazones, .Monedas {[m
+[31m-  display: flex;[m
+[31m-  align-items: center;[m
+[31m-  margin-right: 20px;[m
+[31m-}[m
+[31m-[m
+[31m-.stat-icon {[m
+[31m-  width: 24px;[m
+[31m-  height: 24px;[m
+[31m-  margin-right: 5px;[m
+[31m-}[m
