@@ -22,9 +22,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_152223) do
   end
 
   create_table "leaderboards", force: :cascade do |t|
+    t.integer "user_id"
     t.integer "rank"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_leaderboards_on_user_id"
   end
 
   create_table "options", force: :cascade do |t|
