@@ -122,15 +122,15 @@ class App < Sinatra::Application
     redirect '/'
   end
 
-  get '/lifes' do
-    erb :lifes
-  end
 
 # Ruta para mostrar el progreso del usuario con la carta seleccionada
   get '/progress' do
     if session[:user_id]
       @user = User.find(session[:user_id])
-      @progress = @user.progress
+      @progress = @user.progress 
+      if @progress.nil?
+        @progress = Progress.create(user_id: @user.id, points: 0, correct_answers: 0, incorrect_answers: 0)
+      end
       @selected_card_id = params[:card_id] # Obtener el ID de la carta desde los parámetros de la URL
 
       erb :progress
