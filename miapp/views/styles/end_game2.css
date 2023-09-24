@@ -58,8 +58,8 @@ body {
     text-align: center;
     position: absolute;
     bottom: 10px;
-    left: 50%; /* Agregado */
-    transform: translateX(-50%); /* Agregado */
+    left: 50%; 
+    transform: translateX(-50%); 
   }
   
   .btn-container button {
@@ -74,7 +74,7 @@ body {
   }
   
   .btn-container button:first-child {
-    margin-right: 20px; /* Modificado */
+    margin-right: 20px; 
   }
   
   .btn-container button:hover {

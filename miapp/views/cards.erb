@@ -1,16 +1,33 @@
-<!-- views/cards.erb -->
-<h1>Mis Cartas</h1>
-
-<ul>
-  <% @user.cards.each do |card| %>
-    <li>
-      <strong><%= card.name %></strong>
-      <form action="/use_card" method="post">
-        <input type="hidden" name="card_name" value="<%= card.name %>">
-        <button class="use-card-button" type="submit">Usar</button>
-      </form>
-    </li>
-  <% end %>
-</ul>
-
-<a href="/menu">Volver al Menú</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Cartas</title>
+  <link rel="icon" href="/image/icon.png"/>
+  <link rel="stylesheet" href="/styles/cards.css"> 
+</head>
+<body>
+  <header>
+    <h1>Mis Cartas</h1>
+  </header>
+  
+  <div class="container">
+    <ul>
+      <% @user.cards.each do |card| %>
+        <li>
+          <strong><%= card.name %></strong>
+          <form action="/use_card" method="post">
+            <input type="hidden" name="card_name" value="<%= card.name %>">
+            <button class="use-card-button" type="submit">Usar</button>
+          </form>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  
+  <div class="menu-button-container">
+    <a href="/menu" class="menu-button">Volver al Menú</a>
+  </div>
+</body>
+</html>
