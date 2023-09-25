@@ -88,7 +88,6 @@ a:hover {
   padding: 20px;
 }
 
-/* Media queries para hacer que el diseño sea responsivo */
 
 @media screen and (max-width: 600px) {
   form {
