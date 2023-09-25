@@ -79,36 +79,36 @@ class User < ActiveRecord::Base
   
 
   def buy_card(card_number)
-  card_name = case card_number
-    when 1 then "Messi"
-    when 2 then "Dibala"
-    when 3 then "Romero"
-    when 4 then "Martinez"
-    when 5 then "Molina"
-    when 6 then "Otamendi"
-    when 7 then "Tagliafico"
-    when 8 then "Fernandez"
-    when 9 then "De Paul"
-    when 10 then "Mac Allister"
-    when 11 then "Di Maria"
-    when 12 then "Alvarez"
-    when 13 then "Scaloni"
-    else return false  # Handle the case where card_number is not 1 to 13
-  end
-    # Verificar si el usuario ya tiene la carta
-    if cards.where(name: card_name).exists?
-      return false  # El usuario ya posee la carta
+    card_name = case card_number
+      when 1 then "Messi"
+      when 2 then "Dibala"
+      when 3 then "Romero"
+      when 4 then "Martinez"
+      when 5 then "Molina"
+      when 6 then "Otamendi"
+      when 7 then "Tagliafico"
+      when 8 then "Fernandez"
+      when 9 then "De Paul"
+      when 10 then "Mac Allister"
+      when 11 then "Di Maria"
+      when 12 then "Alvarez"
+      when 13 then "Scaloni"
+      else return false  # Handle the case where card_number is not 1 to 13
     end
+      # Verificar si el usuario ya tiene la carta
+      if cards.where(name: card_name).exists?
+        return false  # El usuario ya posee la carta
+      end
 
-    if self.coins >= 10
-      card = generate_card(card_name, "Posición", 10, true)
-      self.coins -= 10
-      card.update(available: false, user_id: self.id)
-      save
-      return true  # La compra fue exitosa
-    else
-      return false  # No se pudo comprar la carta debido a la falta de monedas
-    end
+      if self.coins >= 10
+        card = generate_card(card_name, "Posición", 10, true)
+        self.coins -= 10
+        card.update(available: false, user_id: self.id)
+        save
+        return true  # La compra fue exitosa
+      else
+        return false  # No se pudo comprar la carta debido a la falta de monedas
+      end
   end
 
   def set_card_by_name
