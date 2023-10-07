@@ -2,12 +2,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 50vh;
+  
   font-family: Arial, sans-serif;
   background-image: url("/image/fondo.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  margin-top: 100px; 
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
 }
 
 h1 {
@@ -46,7 +53,7 @@ button {
   background-color: #008cff;
   color: #fff;
   font-weight: bold;
-  padding: 10px 20px;
+  padding: 10px 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -89,20 +96,7 @@ a:hover {
 }
 
 
-@media screen and (max-width: 600px) {
-  form {
-    width: 90%;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  h1 {
-    font-size: 24px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  h1 {
+h1 {
     font-size: 20px;
-  }
 }
+
