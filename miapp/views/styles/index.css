@@ -3,7 +3,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 50vh;
-  
+  font-size: 60;
   font-family: Arial, sans-serif;
   background-image: url("/image/fondo.png");
   background-size: cover;
@@ -18,14 +18,21 @@ body {
 }
 
 h1 {
-  font-family: Arial, sans-serif;
-  font-size: 28px;
+  font-family: 'FutbolFont', Arial, sans-serif;
+  font-size: 100px;
   font-weight: bold;
   color: #000000;
   text-align: center;
   text-transform: uppercase;
   margin-bottom: 50px;
+  margin-left: 15px;
 }
+
+@font-face {
+  font-family: 'FutbolFont';
+  src: url('/image/Sports World-Regular.ttf') format('truetype');   
+}
+
 
 img {
   max-width: 100%;

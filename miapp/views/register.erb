@@ -1,10 +1,10 @@
 <!DOCTYPE html>
- <html>
-   <head>
-     <link rel="icon" href="/image/icon.png"/>
-     <link rel="stylesheet" href="styles/register3.css"/>
-     <title> Registracion </title>
-     <style>
+<html>
+<head>
+  <link rel="icon" href="/image/icon.png"/>
+  <link rel="stylesheet" href="styles/register3.css"/>
+  <title>Registración</title>
+  <style>
     .error-message {
       color: red;
       font-style: italic;
@@ -17,43 +17,44 @@
   </style>
   <script>
     function checkInputs(event) {
-        var nameInput = document.querySelector('input[name="name"]');
-        var passInput = document.querySelector('input[name="pass"]');
-        var errorMessage = document.querySelector('.error-message');
+      var nameInput = document.querySelector('input[name="name"]');
+      var passInput = document.querySelector('input[name="pass"]');
+      var errorMessage = document.querySelector('.error-message');
 
-        nameInput.style.border = '1px solid #ccc';
-        passInput.style.border = '1px solid #ccc';
-        errorMessage.style.display = 'none';
+      nameInput.style.border = '1px solid #ccc';
+      passInput.style.border = '1px solid #ccc';
+      errorMessage.style.display = 'none';
 
-        if (nameInput.value.trim() === '' && passInput.value.trim() === '') {
-          event.preventDefault();
-          nameInput.style.border = '1px solid red';
-          passInput.style.border = '1px solid red';
-          errorMessage.textContent = 'No se pueden enviar casillas en blanco';
-          errorMessage.style.display = 'block';
-        } else if (nameInput.value.trim() === '') {
-          event.preventDefault();
-          nameInput.style.border = '1px solid red';
-          errorMessage.textContent = 'El campo Usuario no puede estar en blanco';
-          errorMessage.style.display = 'block';
-        } else if (passInput.value.trim() === '') {
-          event.preventDefault();
-          passInput.style.border = '1px solid red';
-          errorMessage.textContent = 'El campo Contraseña no puede estar en blanco';
-          errorMessage.style.display = 'block';
-        }
+      if (nameInput.value.trim() === '' && passInput.value.trim() === '') {
+        event.preventDefault();
+        nameInput.style.border = '1px solid red';
+        passInput.style.border = '1px solid red';
+        errorMessage.textContent = 'No se pueden enviar casillas en blanco';
+        errorMessage.style.display = 'block';
+      } else if (nameInput.value.trim() === '') {
+        event.preventDefault();
+        nameInput.style.border = '1px solid red';
+        errorMessage.textContent = 'El campo Usuario no puede estar en blanco';
+        errorMessage.style.display = 'block';
+      } else if (passInput.value.trim() === '') {
+        event.preventDefault();
+        passInput.style.border = '1px solid red';
+        errorMessage.textContent = 'El campo Contraseña no puede estar en blanco';
+        errorMessage.style.display = 'block';
       }
-    </script>
-   </head>
-   <body>
-     <h1>Crear cuenta </h1>
-     <form action="/register" method="POST" onsubmit="checkInputs(event)">
-      <p>Inserte un usuario y clave</p>
-       <input type="text" name="name" placeholder="Usuario">
-       <input type="password" name="pass" placeholder="Contraseña" pattern="(?=.*[A-Z])(?=.*\d).+" 
-       title="La contraseña debe contener al menos una letra mayúscula y un número" >
-       <button>Registrar</button>
-       <p class="error-message"></p>
-     </form>
-   </body>
- </html>
+    }
+  </script>
+</head>
+<body>
+  <form action="/register" method="POST" onsubmit="checkInputs(event)">
+    <h1>Crear cuenta</h1>
+    <p>Inserte un usuario y clave</p>
+    <input type="text" name="name" id="name" placeholder="Usuario">
+    <input type="password" name="pass" id="pass" placeholder="Contraseña" pattern="(?=.*[A-Z])(?=.*\d).+" title="La contraseña debe contener al menos una letra mayúscula y un número">
+    <button type="submit">Registrar</button>
+    <div class="button"><a href="/index"> Volver al inicio </a></div>
+
+    <p class="error-message"></p>
+  </form>
+</body>
+</html>
