@@ -193,11 +193,11 @@ body {
 }
 
 @font-face {
-  font-family: 'FutbolFont'; /* Nombre de la fuente personalizada */
-  src: url('/image/Sports World-Regular.ttf') format('truetype');   /* Ruta de la fuente o URL */
+  font-family: 'FutbolFont';
+  src: url('/image/Sports World-Regular.ttf') format('truetype');   
 }
 
-/* Estilo del encabezado */
+
 .header-container {
   display: flex;
   justify-content: center;
@@ -208,13 +208,12 @@ body {
   text-align: center;
 }
 
-/* Estilo del texto animado */
 .animated-text {
   font-size: 36px;
   color: hwb(0 100% 0%);
   font-family: 'FutbolFont', Arial, sans-serif;
   letter-spacing: 2px;
-  animation: soccer-animation 1.5s ease forwards; /* Aplicación de la animación */
+  animation: soccer-animation 1.5s ease forwards; 
 }
 
 
