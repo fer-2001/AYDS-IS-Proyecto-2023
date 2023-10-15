@@ -1,111 +1,94 @@
+/* styles.css */
 body {
-    background-image: url("/image/cancha.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
+  background-image: url("/image/cancha.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
-  .page-title {
-      text-align: center;
-      background-color: lightblue;
-      color: black;
-      border-radius: 5px;
-      padding: 10px;
-      margin-bottom: 20px;
-      display: inline-block;
-      position: relative;
-      left: 37.5%;
-  }
+.title-container {
+  text-align: center; 
+  background-color: #fff; 
+  padding: 1px; 
+  border-radius: 2px; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  margin: 20px auto;
+  max-width: 400px; 
+}
 
-  .player-card {
-    width: 300px;
-    background-color: lightblue;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    border-color: black;
-    padding: 20px;
-    margin: 0 auto;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: relative;
-  }
+.page-title {
+  color: #000; 
+}
 
-  .player-image {
-    display: block;
-    width: 300px;
-    height: auto;
-    margin: 0 auto 20px;
-  }
 
-  .player-name {
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 10px;
-    position: absolute;
-    top: 77%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: black;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-  }
+.player-card {
+  background-image: url("/image/cardFond.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 3px solid #000000;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-  .player-info {
-    font-size: 17px;
-    font-weight: bold;
-    color: white;
-    text-align: center;
-    margin-top: 10px;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.player-name {
+  color: #049ec4;
+  margin-bottom: 40px;
+}
 
-  .player-info p {
-    margin: 5px 0;
-  }
+.player-image {
+  max-width: 20%;
+  height: 20%;
+}
 
-  /* Estilos específicos para los datos del jugador */
-  .player-info .label {
-    font-weight: bold;
-  }
+.label {
+  font-weight: bold;
+}
 
-  .player-info .data {
-    color: black;
-  }
+.data {
+  color: #049ec4;
+}
 
-  /* Personalización de la disposición */
-  .name-and-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.menu-button {
+  text-align: center;
+  margin-top: 20px;
+}
 
-  .player-name {
-    margin: 10px 0;
-  }
+button {
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
 
-  .player-image-above-info {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+button:hover {
+  background-color: #ffb620;
+}
 
-  .menu-button {
-    text-align: center;
-    margin-top: 20px;
-  }
+.player-info {
+  text-align: center;
 
-  .menu-button button {
-    padding: 10px 20px;
-    font-size: 20px;
-    background-color: #6ec6ff;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+}
+
+#player-card-image-container {
+  text-align: center; 
+  margin-bottom: 25px; 
+}
+
+#player-card-image {
+  max-width: 100%;
+  height: auto;
+  display: block; 
+}
+
+
+

@@ -1,32 +1,44 @@
 <!DOCTYPE html>
+<html>
 <head>
     <link rel="icon" href="/image/icon.png"/>
     <link rel="stylesheet" href="/styles/progress.css" />
     <title>Progreso</title>
 </head>
-<html>
-<h1 class="page-title">Este es tu Progreso:</h1>
+<body>
+<div class="title-container"> 
+  <h1 class="page-title">Este es tu Progreso</h1>
+</div>
+
 <div class="player-card">
+  <!-- Agrega un elemento div con un ID para actualizar la imagen con JavaScript -->
+  <div id="player-card-image-container">
+    <img src="<%= @user.card_image_url %>" alt="Imagen de la carta" class="player-image" id="player-card-image">
+  </div>
+  
   <div class="name-and-info">
-    <h2 class="player-name"><%= @user.name %></h2>
     <div class="player-info">
-      <div class="player-image-above-info">
-        <img src="/image/silueta.png" alt="Imagen arriba de la información del jugador">
-      </div>
       <p><span class="label">Puntos:</span> <span class="data"><%= @progress.points %></span></p>
       <p><span class="label">Correctas:</span> <span class="data"><%= @progress.correct_answers %></span></p>
       <p><span class="label">Incorrectas:</span> <span class="data"><%= @progress.incorrect_answers %></span></p>
       <p><span class="label">Racha:</span> <span class="data"><%= @user.streak %></span></p>
       <p><span class="label">Rango:</span> <span class="data"><%= @user.role %></span></p>
+      <h2 class="player-name"><%= @user.name %></h2>
     </div>
-  </div>
-  <!-- Agrega un elemento div con un ID para actualizar la imagen con JavaScript -->
-  <div id="player-card-image-container">
-    <img src="<%= @user.card_image_url %>" alt="Imagen de la carta" class="player-image" id="player-card-image">
   </div>
 </div>
 
 <div class="menu-button">
   <button onclick="window.location.href='/menu'">Volver al Menú</button>
 </div>
+
+<script>
+  // Verifica si @user.card_image_url está definido
+  var cardImageUrl = "<%= @user.card_image_url %>";
+  if (cardImageUrl && cardImageUrl !== "") {
+    // Actualiza la imagen si hay una URL válida
+    document.getElementById("player-card-image").src = cardImageUrl;
+  }
+</script>
+</body>
 </html>
