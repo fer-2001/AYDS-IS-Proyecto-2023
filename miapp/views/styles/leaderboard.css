@@ -6,36 +6,54 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  height: 100%; 
-  background: linear-gradient(
-    135deg,
-    rgba(135, 206, 250, 0.8) 0%,
-    hsla(203, 92%, 75%, 0.8) 25%,
-    rgba(255, 255, 255, 0.8) 25%,
-    rgba(255, 255, 255, 0.8) 50%,
-    rgba(135, 206, 250, 0.8) 50%,
-    rgba(135, 206, 250, 0.8) 75%,
-    rgba(255, 255, 255, 0.8) 75%,
-    rgba(255, 255, 255, 0.8) 100%
-  );
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+body::after {
+  content: "";
+  background-image: url('/image/lideres.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  filter: blur(2px);
+  opacity: 0.7;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+  
+h1 {
+  font-family: 'FutbolFont', Arial, sans-serif;
+  background-color: rgb(0, 0, 0);
+  border: 2px solid rgba(0, 0, 0, 0.3); 
+  border-radius: 10px; 
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 0;
+  margin-left: 70px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+
+@font-face {
+  font-family: 'FutbolFont';
+  src: url('/image/Sports World-Regular.ttf') format('truetype');   
 }
   
-  h1 {
-    background-color: rgb(0, 0, 0);
-    border: 2px solid rgba(0, 0, 0, 0.3); 
-    border-radius: 10px; 
-    color: #ffffff;
-    text-align: center;
-    padding: 10px 0;
-  }
-  
   table {
-    width: 80%;
-    margin-top: 100px;
-    margin: 200px auto;
+    width: 1000px;
+    margin-bottom: 50px;
+    margin-left: 70px;
     border-collapse: collapse;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -75,18 +93,18 @@ a {
 
 .button-below-table {
     display: block;
+    position: relative;
     text-align: center;
-    margin-top: 100px; 
     text-decoration: none;
     background-color: #000000;
     color: #fff;
-    padding: 12px 16px;
+    padding: 12px 14px;
     transition: background-color 0.5s ease;
     border-radius: 9px;
     font-size: 18px; 
-    width: 190px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 70px;
+    margin-bottom: 40px;
+    
   }
   
   .button-below-table:hover {

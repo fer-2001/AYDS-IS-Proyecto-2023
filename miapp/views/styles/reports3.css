@@ -6,35 +6,41 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  height: 100%; 
-  background: linear-gradient(
-    135deg,
-    rgba(135, 206, 250, 0.8) 0%,
-    hsla(203, 92%, 75%, 0.8) 25%,
-    rgba(255, 255, 255, 0.8) 25%,
-    rgba(255, 255, 255, 0.8) 50%,
-    rgba(135, 206, 250, 0.8) 50%,
-    rgba(135, 206, 250, 0.8) 75%,
-    rgba(255, 255, 255, 0.8) 75%,
-    rgba(255, 255, 255, 0.8) 100%
-  );
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+body::after {
+  content: "";
+  background-image: url('/image/lideres.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  filter: blur(2px);
+  opacity: 0.7;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
-
 .content {
   padding: 20px; 
 }
   
-    .container {
-    position: sticky;
-    max-width: 500px;
-    height: 700px;
-    margin-left: 500px;
+  .container {
+    position: center;
+    width: 400px;
+    height: 500px;
+    margin-left: 100px;
     background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 51px;
+    border-radius: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
 
@@ -47,20 +53,30 @@ body {
   }
   
   h1 {
-    text-align: center;
+    font-family: 'FutbolFont', Arial, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
     color: #000000;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 150px;
+  }
+  
+  @font-face {
+    font-family: 'FutbolFont';
+    src: url('/image/Sports World-Regular.ttf') format('truetype');   
   }
   
   input {
-    width: 300px;
+    margin-bottom: 200px;
+    width: 200px;
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
   }
   .btn-container {
     text-align: right;
-    margin-bottom: 150px;
+    margin-bottom: 100px;
     position: absolute;
     bottom: 10px;
   }
@@ -99,6 +115,7 @@ body {
 
 .btn-back button {
   display: inline-block;
+  text-decoration: none;
   padding: 10px 20px;
   background-color: hsl(0, 0%, 0%);
   color: hsl(0, 0%, 100%);
