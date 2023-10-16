@@ -7,7 +7,7 @@ require_relative '../../models/question.rb'
 describe Progress do
     describe 'valid' do 
       before(:each) do
-        @user = User.create(name: 'test_user', pass: 'Test_pass1')
+        @user = User.create(name: 'test_user', password: 'Test_pass1')
       end
 
         describe 'when there is no current_question' do

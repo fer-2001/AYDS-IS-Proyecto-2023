@@ -1,7 +1,8 @@
+require 'bcrypt'
+
 class User < ActiveRecord::Base
   validates_uniqueness_of :name
   validates :name, presence: true
-  validates :pass, presence: true, format: { with: /\A(?=.*[A-Z])(?=.*\d)/, message: "La contraseña contener al menos una letra mayúscula y un número" }
   validates :lifes, presence: true
   validates :lifes, numericality: { less_than_or_equal_to: 5, greater_than_or_equal_to: 0 } 
   validates :streak, presence: true
@@ -15,8 +16,12 @@ class User < ActiveRecord::Base
   has_many :responses
   has_many :options, through: :responsescard
   has_many :cards
-
+  has_secure_password
   
+  def authenticate(password)
+    BCrypt::Password.new(self.password_digest) == password
+  end
+
   ROLES = {
     clasificado: 'Clasificado',
     novato: 'Novato',

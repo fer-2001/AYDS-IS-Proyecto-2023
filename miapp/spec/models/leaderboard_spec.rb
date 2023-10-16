@@ -14,15 +14,15 @@ RSpec.describe Leaderboard do
     end 
 
     it "should relate to a user" do
-        user = User.create(name: 'Ejemplo',pass: 'M3')  
+        user = User.create(name: 'Ejemplo',password: 'M3')  
         leaderboard = Leaderboard.create(rank: 1, user: user)
         expect(leaderboard.user).to eq(user)
     end
 
 
     it 'should place the user with the most points in the first position of the rank' do 
-        u1 = User.create(name:'Mario',pass: 'M3',points: 15)
-        u2 = User.create(name:'Jose',pass: 'M2',points: 5)
+        u1 = User.create(name:'Mario',password: 'M3',points: 15)
+        u2 = User.create(name:'Jose',password: 'M2',points: 5)
         Leaderboard.update_rank
         first_place = Leaderboard.first
         expect(first_place.user.name).to eq(u1.name) 

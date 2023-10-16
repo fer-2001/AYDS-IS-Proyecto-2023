@@ -89,13 +89,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_152223) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "pass"
+    t.string "password"
     t.integer "lifes", default: 5
     t.integer "points", default: 0
     t.integer "streak", default: 0
     t.integer "coins", default: 0
     t.string "card", default: "card"
     t.string "role", default: "clasificado"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
