@@ -5,22 +5,23 @@
   <link rel="stylesheet" href="styles/index.css"/>
   <title>ADT</title>
   <style>
+
     form {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-right: 50px;
-      justify-content: center;
-      height: 70vh;
+      text-align: center;
     }
 
     img {
-      max-width: 100%;
+      max-width: 80%;
       height: auto;
+      margin-bottom: 20px;
     }
 
     h1 {
-      text-align: center;
+      text-align: left; 
     }
 
     p {
@@ -29,6 +30,10 @@
 
     input, button {
       width: 100%;
+    }
+
+    .register-link {
+      margin-top: auto;
     }
 
   </style>
@@ -42,7 +47,7 @@
     <input type="password" required name="password" placeholder="Contraseña">
     <button id="ingresar-button">Ingresar</button>
     <p class="error-message" id="error-message"></p>
-    <p><a href="/register">Registrate</a></p>
+    <p class="register-link"><a href="/register">Registrate</a></p>
   </form>
 </body>
 </html>
