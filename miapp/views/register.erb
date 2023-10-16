@@ -66,8 +66,8 @@
     </script>
   </head>
   <body>
-    <h1>Crear cuenta</h1>
     <form action="/register" method="POST" onsubmit="checkInputs(event)">
+      <h1>Crear cuenta</h1>
       <p>Inserte un usuario y clave</p>
       <input type="text" name="name" placeholder="Usuario" onblur="checkUsername()">
       <input
@@ -78,6 +78,7 @@
         title="La contraseña debe contener al menos una letra mayúscula y un número"
       >
       <button>Registrar</button>
+      <div class="button"><a href="/index"> Volver al inicio </a></div>
       <p class="error-message">
         <% if @user_exists %>
           Nombre de usuario ya está en uso, elija otro.
