@@ -104,6 +104,15 @@ class App < Sinatra::Application
       # Credenciales válidas, establece la sesión
       session[:user_id] = user.id
       session[:username] = user.name
+
+      if session[:user_id]
+        @user = User.find(session[:user_id])
+        @progress = @user.progress
+        if @progress.nil?
+          @progress = Progress.create(user_id: @user.id, points: 0, correct_answers: 0, incorrect_answers: 0)
+        end
+      end
+
   
       redirect '/menu' # Redirige a la página de inicio después del inicio de sesión exitoso
     else
@@ -175,17 +184,9 @@ class App < Sinatra::Application
   
   get '/questions' do
     @user = User.find(session[:user_id])
-    if (@user.check_lifes)
+    @progress = @user.progress
+    if @user.check_lifes
       erb :lifes
-    else
-      @questions = Question.all
-      erb :question
-    end
-  end
-  get '/questions' do
-    @user = User.find(session[:user_id])
-    if (@user.check_lifes)
-      redirect '/lifes'
     else
       @questions = Question.all
       erb :question
@@ -194,11 +195,6 @@ class App < Sinatra::Application
 
   get '/end_game' do
     erb :end_game
-  end
-
-  post '/save_question_index' do
-    session[:current_question] = params[:question_index].to_i
-    status 200
   end
 
   get '/check_lifes' do
@@ -263,7 +259,7 @@ class App < Sinatra::Application
       end
        # Obtener el progreso del usuario
       if progress
-        question = option.question
+
         is_correct = option.correct
         Response.create(user_id: user_id, option_id: option_id)
 

@@ -2,3 +2,4 @@ db/duo_development.sqlite3
 db/test.sqlite3
 views/prueba.html
 coverage
+.idea/
