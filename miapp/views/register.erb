@@ -1,31 +1,32 @@
 <!DOCTYPE html>
- <html>
-   <head>
-     <link rel="icon" href="/image/icon.png"/>
-     <link rel="stylesheet" href="styles/register3.css"/>
-     <title> Registracion </title>
-     <style>
-    .error-message {
-      color: red;
-      font-style: italic;
-      margin-top: 10px;
-      font-weight: bold;
-      text-align: center;
-      display: none;
-      font-size: calc(1em - 2px);
-    }
-  </style>
-  <script>
-    function checkInputs(event) {
+<html>
+  <head>
+    <link rel="icon" href="/image/icon.png" />
+    <link rel="stylesheet" href="styles/register3.css" />
+    <title>Registración</title>
+    <style>
+      .error-message {
+        color: red;
+        font-style: italic;
+        margin-top: 10px;
+        font-weight: bold;
+        text-align: center;
+        font-size: calc(1em - 2px);
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function checkInputs(event) {
         var nameInput = document.querySelector('input[name="name"]');
         var passInput = document.querySelector('input[name="pass"]');
         var errorMessage = document.querySelector('.error-message');
+        var name = nameInput.value.trim();
 
-        nameInput.style.border = '1px solid #ccc';
-        passInput.style.border = '1px solid #ccc';
-        errorMessage.style.display = 'none';
+      nameInput.style.border = '1px solid #ccc';
+      passInput.style.border = '1px solid #ccc';
+      errorMessage.style.display = 'none';
 
-        if (nameInput.value.trim() === '' && passInput.value.trim() === '') {
+        if (nameInput.value.trim() === '' || passInput.value.trim() === '') {
           event.preventDefault();
           nameInput.style.border = '1px solid red';
           passInput.style.border = '1px solid red';
@@ -43,17 +44,46 @@
           errorMessage.style.display = 'block';
         }
       }
+
+      // La función para verificar el nombre de usuario en uso
+      function checkUsername() {
+        var nameInput = document.querySelector('input[name="name"]');
+        var errorMessage = document.querySelector('.error-message');
+
+        nameInput.style.border = '1px solid #ccc';
+        errorMessage.style.display = 'none';
+
+        var name = nameInput.value.trim();
+
+        $.post('/check-username', { name: name }, function (data) {
+          if (data === 'in_use') {
+            nameInput.style.border = '1px solid red';
+            errorMessage.textContent = 'Nombre de usuario ya está en uso, elija otro.';
+            errorMessage.style.display = 'block';
+          }
+        });
+      }
     </script>
-   </head>
-   <body>
-     <h1>Crear cuenta </h1>
-     <form action="/register" method="POST" onsubmit="checkInputs(event)">
+  </head>
+  <body>
+    <form action="/register" method="POST" onsubmit="checkInputs(event)">
+      <h1>Crear cuenta</h1>
       <p>Inserte un usuario y clave</p>
-       <input type="text" name="name" placeholder="Usuario">
-       <input type="password" name="pass" placeholder="Contraseña" pattern="(?=.*[A-Z])(?=.*\d).+" 
-       title="La contraseña debe contener al menos una letra mayúscula y un número" >
-       <button>Registrar</button>
-       <p class="error-message"></p>
-     </form>
-   </body>
- </html>
+      <input type="text" name="name" placeholder="Usuario" onblur="checkUsername()">
+      <input
+        type="password"
+        name="pass"
+        placeholder="Contraseña"
+        pattern="(?=.*[A-Z])(?=.*\d).+"
+        title="La contraseña debe contener al menos una letra mayúscula y un número"
+      >
+      <button>Registrar</button>
+      <div class="button"><a href="/index"> Volver al inicio </a></div>
+      <p class="error-message">
+        <% if @user_exists %>
+          Nombre de usuario ya está en uso, elija otro.
+        <% end %>
+      </p>
+    </form>
+  </body>
+</html>

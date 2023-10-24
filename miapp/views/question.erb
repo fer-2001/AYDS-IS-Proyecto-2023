@@ -53,7 +53,13 @@
 </head>
 <body>
   <div class="container">
-    <% pregunta_actual = session[:current_question] || 0 %>
+    <% pregunta_actual = session[:current_question] || @user.progress.current_question || 0 %>
+    <% totalPreguntas = @questions.length %>
+    <% if pregunta_actual >= totalPreguntas %>
+      <script>
+          location.href = '/end_game';
+      </script>
+    <% end %>
     <% @questions.each_with_index do |question, index| %>
       <% next if index < pregunta_actual %>
       <div class="question" id="question<%= index %>" <%= 'style="display: none;"' if index != pregunta_actual %>>
@@ -105,20 +111,24 @@
     }
 
     function seleccionarRespuesta(preguntaIndex, correct) {
-      respuestas[preguntaIndex] = correct;
+        respuestas[preguntaIndex] = correct;
 
-      var opciones = $('#question' + preguntaIndex + ' .option');
-      opciones.removeClass('selected');
+        var opciones = $('#question' + preguntaIndex + ' .option');
+        opciones.removeClass('selected');
 
-      var opcionSeleccionada = $('#question' + preguntaIndex + ' .option input[type="radio"]:checked + label');
-      if (opcionSeleccionada.length > 0) {
-        opcionSeleccionada.closest('.option').addClass('selected');
-      }
+        var opcionSeleccionada = $('#question' + preguntaIndex + ' .option input[type="radio"]:checked + label');
+        if (opcionSeleccionada.length > 0) {
+            opcionSeleccionada.closest('.option').addClass('selected');
+        }
 
-      var respuestaElemento = $('#question' + preguntaIndex + ' .question-response');
-      respuestaElemento.text(correct ? 'Respuesta correcta' : 'Respuesta incorrecta');
-      respuestaElemento.removeClass('correct incorrect');
-      respuestaElemento.addClass(correct ? 'correct' : 'incorrect');
+        // Deshabilita todos los radio buttons en esta pregunta
+        $('#question' + preguntaIndex + ' input[type="radio"]').attr('disabled', 'disabled');
+        $('#menuButton').prop('disabled', true);
+
+        var respuestaElemento = $('#question' + preguntaIndex + ' .question-response');
+        respuestaElemento.text(correct ? 'Respuesta correcta' : 'Respuesta incorrecta');
+        respuestaElemento.removeClass('correct incorrect');
+        respuestaElemento.addClass(correct ? 'correct' : 'incorrect');
     }
 
     function mostrarCuriosidad(curiosidad) {
@@ -169,7 +179,7 @@
         }
       });
 
-      verificarVidasRestantes(); 
+      verificarVidasRestantes();
       preguntaActual++;
       localStorage.setItem('preguntaActual', preguntaActual);
 
@@ -177,7 +187,7 @@
         ocultarPreguntas();
         mostrarPreguntaActual();
       } else {
-        location.href = '/end_game';
+          location.href = '/end_game';
       }
     }
 
@@ -199,21 +209,7 @@
     
 
     function regresarMenu() {
-      // Guardar la pregunta actual en la sesión
-      $.ajax({
-        url: '/save_question_index',
-        method: 'POST',
-        data: {
-          question_index: preguntaActual
-        },
-        success: function(response) {
-          console.log('Índice de pregunta guardado en la sesión.');
-          window.location.href = '/menu';
-        },
-        error: function(xhr) {
-          console.error('Error al guardar el índice de pregunta en la sesión.');
-        }
-      });
+        window.location.href = '/menu';
     }
 
     ocultarPreguntas();
