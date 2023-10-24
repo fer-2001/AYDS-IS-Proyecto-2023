@@ -20,4 +20,4 @@ gem 'sqlite3'
 gem 'simplecov'
 gem 'rack-test'
 gem 'bcrypt'
-gem 'rubocop'
+gem 'rubocop',require: false
