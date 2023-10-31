@@ -101,7 +101,7 @@ class User < ActiveRecord::Base
       else return false  # Handle the case where card_number is not 1 to 13
     end
       # Verificar si el usuario ya tiene la carta
-      if cards.where(name: card_name).exists?
+      if cards.where(name: card_name, user_id: self.id).count > 0
         return false  # El usuario ya posee la carta
       end
 

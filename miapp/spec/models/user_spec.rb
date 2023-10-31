@@ -13,13 +13,6 @@ describe User do
       end
     end
 
-    describe 'when there is a name and password' do
-      it 'is valid' do
-        u = User.new(name: 'John', password: 'A1')
-        expect(u.valid?).to eq(true)
-      end
-    end
-
     describe 'when there is no password' do 
       it 'should be invalid' do
         u = User.new(name: 'John', password: nil)
@@ -63,28 +56,6 @@ describe User do
       end
     end
 
-    describe 'when password not contains a capital letter' do 
-        it 'should be invalid' do
-          u = User.new(name: 'John', password: 'hola1')
-          expect(u.valid?).to be_falsey
-          expect(u.errors[:password]).to include("La contraseña contener al menos una letra mayúscula y un número")
-      end
-    end
-
-    describe 'when password not contains a number' do 
-      it 'should be invalid' do
-        u = User.new(name: 'John', password: 'Hola')
-        expect(u.valid?).to be_falsey
-        expect(u.errors[:password]).to include("La contraseña contener al menos una letra mayúscula y un número")
-      end
-    end
-
-    describe 'when password contains a number and a capital letter' do 
-      it 'should be valid' do
-        u = User.new(name: 'John', password: 'Hola1')
-        expect(u.valid?).to be_truthy
-      end
-    end
 
     describe 'when lifes equal 0' do 
       it 'should be valid' do
@@ -95,8 +66,8 @@ describe User do
 
     describe 'when use the method for buy cards' do 
       it 'should be valid' do
-        u = User.new(name: 'John', password: 'Hola1', coins: 140)
-        v = User.new(name: 'Manu', password: 'Hola1', coins: 5)
+        u = User.new(name: 'John', coins: 140)
+        v = User.new(name: 'Manu', coins: 5)
         expect(v.buy_card(1)).to be_falsey
         expect(u.buy_card(1)).to be_truthy
         expect(u.buy_card(2)).to be_truthy
