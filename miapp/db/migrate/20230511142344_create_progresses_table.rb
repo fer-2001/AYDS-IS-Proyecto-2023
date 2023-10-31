@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateProgressesTable < ActiveRecord::Migration[7.0]
   def change
     create_table :progresses do |t|
@@ -8,7 +10,7 @@ class CreateProgressesTable < ActiveRecord::Migration[7.0]
       t.integer :lose_points, default: 0
       t.integer :points, default: 0
       t.integer :question_index
-      #t.references :user, foreign_key: true
+      # t.references :user, foreign_key: true
       t.timestamps
     end
   end
