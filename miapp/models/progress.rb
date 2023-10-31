@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Progress < ActiveRecord::Base
   belongs_to :user
   has_many :cards

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Método para generar preguntas y opciones asociadas
 require_relative '../models/card'
 
@@ -7,7 +9,7 @@ def generate_question(content, options, difficulty, points, curiosity)
 end
 
 def generate_card(name, position, price, available)
-  card = Card.create(name: name, position: position, price: price, available: available)
+  Card.create(name:, position:, price:, available:)
 end
 
 Card.destroy_all
@@ -18,8 +20,8 @@ generate_question('¿Cuántos goles marcó Lionel Messi durante el Mundial 2022?
                     { content: '4', correct: false },
                     { content: '7', correct: true },
                     { content: '5', correct: false },
-                    { content: '3', correct: false },
-                    #{Messi metio 7 goles en el mundial 2022, salio 2do mayor goleador del mundial}
+                    { content: '3', correct: false }
+                    # {Messi metio 7 goles en el mundial 2022, salio 2do mayor goleador del mundial}
                   ], 3, 15, 'Messi salio 2do mayor goleador del mundial 2022 jugado en Qatar')
 
 generate_question('¿Cuál fue el resultado del partido de Argentina contra Francia en la final del mundial 2022?', [
@@ -27,7 +29,7 @@ generate_question('¿Cuál fue el resultado del partido de Argentina contra Fran
                     { content: 'Victoria de Argentina 2-1', correct: false },
                     { content: 'Empate 2-2', correct: false },
                     { content: 'Derrota de Argentina 1-3', correct: false }
-                    #{El Argentina- Francia en octavos resulto en la victoria de argentina 2-1, }
+                    # {El Argentina- Francia en octavos resulto en la victoria de argentina 2-1, }
                   ], 2, 15, 'Luego de esto Argentina se consagro CAMPEON MUNDIAL ganandole 4-2 a Francia en penales.')
 
 generate_question('¿Quien fue el DT de la seleccion durante el mundial 2022?', [
@@ -42,7 +44,8 @@ generate_question('¿Cual es la mayor Racha de invicto que tuvo la escaloneta?',
                     { content: '27', correct: false },
                     { content: '28', correct: false },
                     { content: '36', correct: true }
-                  ], 5, 15, 'La mayor racha fue de 36 partidos. El único partido que perdió Argentina fue contra Arabia Saudita')
+                  ], 5, 15, 'La mayor racha fue de 36 partidos.
+                   El único partido que perdió Argentina fue contra Arabia Saudita')
 
 generate_question('¿Que fecha la Scaloneta gano la Copa America?', [
                     { content: '10/10/2021', correct: false },
@@ -81,16 +84,16 @@ generate_question('¿Cuantos años tenia Scaloni durante el mundial 2022?', [
                   44 años por lo cual es el director técnico más joven de la Copa del Mundo 2022')
 
 
-generate_card("Messi", "10",10, true)
-generate_card("Dibala", "21",10, true)
-generate_card("Romero", "13",10, true)
-generate_card("Martinez", "23",10, true)
-generate_card("Molina", "26",10, true)
-generate_card("Otamendi", "19",10, true)
-generate_card("Tagliafico", "8",10, true)
-generate_card("Fernandez", "24",10, true)
-generate_card("De Paul", "7",10, true)
-generate_card("Mac Allister", "20",10, true)
-generate_card("Di Maria", "11",10, true)
-generate_card("Alvarez", "9",10, true)
-generate_card("Scaloni", "0",10, true)
+generate_card('Messi', '10', 10, true)
+generate_card('Dibala', '21', 10, true)
+generate_card('Romero', '13', 10, true)
+generate_card('Martinez', '23', 10, true)
+generate_card('Molina', '26', 10, true)
+generate_card('Otamendi', '19', 10, true)
+generate_card('Tagliafico', '8', 10, true)
+generate_card('Fernandez', '24', 10, true)
+generate_card('De Paul', '7', 10, true)
+generate_card('Mac Allister', '20', 10, true)
+generate_card('Di Maria', '11', 10, true)
+generate_card('Alvarez', '9', 10, true)
+generate_card('Scaloni', '0', 10, true)

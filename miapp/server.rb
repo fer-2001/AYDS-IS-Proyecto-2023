@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sinatra/base'
 require 'bundler/setup'
 require 'logger'
@@ -32,11 +34,11 @@ class App < Sinatra::Application
 
   set :root,  File.dirname('miapp')
   set :views, proc { File.join(root, 'views') }
-  set :public_folder, File.dirname(__FILE__) + '/views'
+  set :public_folder, "#{File.dirname(__FILE__)}/views"
   configure :production, :development do
     enable :logging
 
-    logger = Logger.new(STDOUT)
+    logger = Logger.new($stdout)
     logger.level = Logger::DEBUG if development?
     set :logger, logger
   end
@@ -50,7 +52,8 @@ class App < Sinatra::Application
 
   before do
     # Verifica si el usuario ha iniciado sesión antes de permitir el acceso a todas las rutas excepto /login
-    unless ['/', '/register', '/users', '/noRegistrado' , '/increment_lifes'].include?(request.path_info) || session[:user_id]
+    unless ['/', '/register', '/users', '/noRegistrado',
+            '/increment_lifes'].include?(request.path_info) || session[:user_id]
       redirect '/' # Redirige al formulario de inicio de sesión si el usuario no ha iniciado sesión
     end
   end
@@ -75,8 +78,8 @@ class App < Sinatra::Application
   end
 
   post '/reports' do
-    user_id = session[:user_id]
-    @report = Report.find_or_create_by(user_id: params[:user_id],description: params[:description],
+    session[:user_id]
+    @report = Report.find_or_create_by(user_id: params[:user_id], description: params[:description],
                                        date: params[:date])
     erb :reports
   end
@@ -87,20 +90,20 @@ class App < Sinatra::Application
 
 
   post '/suggestion' do
-    user_id = session[:user_id]
-    @suggestion = Suggestion.find_or_create_by( user_id: params[:user_id],description: params[:description],
-                                              date: params[:date])
+    session[:user_id]
+    @suggestion = Suggestion.find_or_create_by(user_id: params[:user_id], description: params[:description],
+                                               date: params[:date])
     erb :suggestion
   end
 
   post '/users' do
     username = params[:username]
     password = params[:password]
-  
+
     # Realiza la autenticación de usuario, por ejemplo, usando tu modelo User y el método `authenticate` si estás utilizando bcrypt
     user = User.find_by(name: username)
-    
-    if user && user.authenticate(password)
+
+    if user&.authenticate(password)
       # Credenciales válidas, establece la sesión
       session[:user_id] = user.id
       session[:username] = user.name
@@ -113,7 +116,7 @@ class App < Sinatra::Application
         end
       end
 
-  
+
       redirect '/menu' # Redirige a la página de inicio después del inicio de sesión exitoso
     else
       # Credenciales inválidas, muestra un mensaje de error
@@ -121,23 +124,23 @@ class App < Sinatra::Application
       redirect '/noRegistrado' # Redirige de nuevo al formulario de inicio de sesión
     end
   end
-  
+
 
   get '/noRegistrado' do
     erb :noRegistrado
   end
 
-  post '/logout' do 
+  post '/logout' do
     session.clear
     redirect '/'
   end
 
 
-# Ruta para mostrar el progreso del usuario con la carta seleccionada
+  # Ruta para mostrar el progreso del usuario con la carta seleccionada
   get '/progress' do
     if session[:user_id]
       @user = User.find(session[:user_id])
-      @progress = @user.progress 
+      @progress = @user.progress
       if @progress.nil?
         @progress = Progress.create(user_id: @user.id, points: 0, correct_answers: 0, incorrect_answers: 0)
       end
@@ -153,13 +156,13 @@ class App < Sinatra::Application
 
   post '/register' do
     name = params[:name]
-  
-    if User.exists?(name: name)
+
+    if User.exists?(name:)
       @user_exists = true
       erb :register
     else
-      @user = User.new(name: name, password: params[:pass])
-  
+      @user = User.new(name:, password: params[:pass])
+
       if @user.save
         flash[:success] = 'Usuario registrado exitosamente'
         redirect '/users'
@@ -169,19 +172,19 @@ class App < Sinatra::Application
       end
     end
   end
-  
-  
-  
+
+
+
   get '/register' do
     erb :register
   end
-  
+
 
   get '/menu' do
     @user = User.find(session[:user_id])
     erb :menu
   end
-  
+
   get '/questions' do
     @user = User.find(session[:user_id])
     @progress = @user.progress
@@ -207,10 +210,10 @@ class App < Sinatra::Application
     end
   end
 
-  get '/lifes' do 
+  get '/lifes' do
     erb :lifes
   end
-  
+
 
   post '/responses' do
     request_body = JSON.parse(request.body.read)
@@ -227,7 +230,7 @@ class App < Sinatra::Application
     end
 
     # Verificar si el usuario ya ha respondido esa pregunta
-    response = Response.find_by(user_id: user_id, option_id: option_id)
+    response = Response.find_by(user_id:, option_id:)
     if response
       new_question = Question.where.not(id: @questions.map(&:id)).sample
       # Serializar la nueva pregunta y enviarla como respuesta al cliente
@@ -244,26 +247,27 @@ class App < Sinatra::Application
       curiosities = question.curiosities
 
       # Renderizar el erb con la curiosidad y la respuesta
-      erb :curiosities, locals: { question: question, selected_option: selected_option, correct_option: correct_option, curiosities: curiosities }
+      erb :curiosities,
+          locals: { question:, selected_option:, correct_option:, curiosities: }
 
     else
       # Crear la respuesta y asociarla al usuario y la opción
       is_correct = option.correct
-      Response.create(user_id: user_id, option_id: option_id)
+      Response.create(user_id:, option_id:)
 
 
-      progress = Progress.find_by(user_id: user_id)
+      progress = Progress.find_by(user_id:)
       if progress.nil?
         # Si no se encontró ningún progreso para el usuario, puedes crear uno nuevo
-        progress = Progress.create(user_id: user_id)
+        progress = Progress.create(user_id:)
       end
-       # Obtener el progreso del usuario
+      # Obtener el progreso del usuario
       if progress
 
         is_correct = option.correct
-        Response.create(user_id: user_id, option_id: option_id)
+        Response.create(user_id:, option_id:)
 
-        progress = Progress.find_or_create_by(user_id: user_id)
+        progress = Progress.find_or_create_by(user_id:)
 
         progress.update_progress(option, is_correct)
         user.update_fields(option)
@@ -271,7 +275,7 @@ class App < Sinatra::Application
       end
 
       if is_correct
-        '¡Respuesta correcta!'  
+        '¡Respuesta correcta!'
       else
         'Respuesta incorrecta'
       end
@@ -279,7 +283,7 @@ class App < Sinatra::Application
   end
 
   get '/leaderboard' do
-    @datos = User.order(points: :desc).limit(5) 
+    @datos = User.order(points: :desc).limit(5)
     erb :leaderboard
   end
 
@@ -309,18 +313,18 @@ class App < Sinatra::Application
   # Ruta para comprar una carta
   post '/buy_card/:card_id' do
     @user = User.find(session[:user_id])
-    card_number = params[:card_id].to_i  # Convertir a número entero
+    card_number = params[:card_id].to_i # Convertir a número entero
     if @user.buy_card(card_number)
       redirect '/exito'
     else
       redirect '/fail'
     end
   end
-  
+
   get '/exito' do
     erb :exito
   end
-  
+
   get '/fail' do
     erb :fail
   end
@@ -337,8 +341,6 @@ class App < Sinatra::Application
       @user.save
       # Redirigir a la página de menu si la actualización se guardó correctamente
       redirect '/progress'
-    end 
+    end
   end
-
-
 end
