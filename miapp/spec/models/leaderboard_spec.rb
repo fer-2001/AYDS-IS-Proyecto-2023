@@ -15,9 +15,10 @@ RSpec.describe Leaderboard do
     expect(lb.valid?).to eq(false)
   end
 
-  it 'should relate to a user' do
-    user = User.create(name: 'Ejemplo', password: 'M3')
-    leaderboard = Leaderboard.create(rank: 1, user:)
+  it "should have a user association" do
+    leaderboard = Leaderboard.create
+    user = User.create
+    leaderboard.update(user: user)
     expect(leaderboard.user).to eq(user)
   end
 
