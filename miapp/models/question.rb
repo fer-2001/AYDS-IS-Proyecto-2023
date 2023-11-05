@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Class Question
 class Question < ActiveRecord::Base
   validates :question, presence: true
   validates :difficult, presence: true

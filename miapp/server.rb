@@ -218,69 +218,13 @@ class App < Sinatra::Application
   post '/responses' do
     request_body = JSON.parse(request.body.read)
 
-    option_id = request_body['option_id']
-    user_id = request_body['user_id']
+    status, response_data = Response.handle_response(request_body)
 
-    # Verificar si la opción y el usuario existen
-    option = Option.find(option_id)
-    user = User.find_by(id: user_id)
-    unless option && user
-      status 404
-      return 'Opción o usuario no encontrados'
-    end
-
-    # Verificar si el usuario ya ha respondido esa pregunta
-    response = Response.find_by(user_id:, option_id:)
-    if response
-      new_question = Question.where.not(id: @questions.map(&:id)).sample
-      # Serializar la nueva pregunta y enviarla como respuesta al cliente
-      content_type :json
-      { question: new_question }.to_json
-      # Obtener la pregunta y la respuesta seleccionada
-      question = option.question
-      selected_option = Option.find_by(id: option_id)
-
-      # Obtener la respuesta correcta
-      correct_option = question.options.find_by(correct: true)
-
-      # Obtener las curiosidades de la pregunta
-      curiosities = question.curiosities
-
-      # Renderizar el erb con la curiosidad y la respuesta
-      erb :curiosities,
-          locals: { question:, selected_option:, correct_option:, curiosities: }
-
-    else
-      # Crear la respuesta y asociarla al usuario y la opción
-      is_correct = option.correct
-      Response.create(user_id:, option_id:)
-
-
-      progress = Progress.find_by(user_id:)
-      if progress.nil?
-        # Si no se encontró ningún progreso para el usuario, puedes crear uno nuevo
-        progress = Progress.create(user_id:)
-      end
-      # Obtener el progreso del usuario
-      if progress
-
-        is_correct = option.correct
-        Response.create(user_id:, option_id:)
-
-        progress = Progress.find_or_create_by(user_id:)
-
-        progress.update_progress(option, is_correct)
-        user.update_fields(option)
-        user.update_role
-      end
-
-      if is_correct
-        '¡Respuesta correcta!'
-      else
-        'Respuesta incorrecta'
-      end
-    end
+    status status
+    content_type :json
+    response_data
   end
+
 
   get '/leaderboard' do
     @datos = User.order(points: :desc).limit(5)

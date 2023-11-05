@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'bcrypt'
-
+# Class User
 class User < ActiveRecord::Base
   validates_uniqueness_of :name
   validates :name, presence: true
