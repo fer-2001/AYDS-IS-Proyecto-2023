@@ -130,13 +130,13 @@ class App < Sinatra::Application
       @user = User.find(session[:user_id])
       @progress = @user.progress
       if @progress.nil?
-        @progress = Progress.create(user_id: @user.id, points: 0, correct_answers: 0, incorrect_answers: 0)
+        create_user(user_id)
       end
-      @selected_card_id = params[:card_id] # Obtener el ID de la carta desde los parámetros de la URL
+      @selected_card_id = params[:card_id]
 
       erb :progress
     else
-      redirect '/users' # Redirigir a la página de inicio de sesión si no hay sesión iniciada
+      redirect '/users' 
     end
   end
 
@@ -150,7 +150,6 @@ class App < Sinatra::Application
       erb :register
     else
       @user = User.new(name:, password: params[:pass])
-
       if @user.save
         flash[:success] = 'Usuario registrado exitosamente'
         redirect '/users'

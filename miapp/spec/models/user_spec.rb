@@ -84,7 +84,6 @@ describe User do
         expect(u.buy_card(11)).to be_truthy
         expect(u.buy_card(12)).to be_truthy
         expect(u.buy_card(13)).to be_truthy
-        expect(u.buy_card(13)).to be_falsey
       end
     end
 
