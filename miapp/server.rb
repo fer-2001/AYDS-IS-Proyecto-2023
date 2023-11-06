@@ -99,30 +99,18 @@ class App < Sinatra::Application
   post '/users' do
     username = params[:username]
     password = params[:password]
-
-    # Realiza la autenticación de usuario, por ejemplo, usando tu modelo User y el método `authenticate` si estás utilizando bcrypt
     user = User.find_by(name: username)
-
     if user&.authenticate(password)
-      # Credenciales válidas, establece la sesión
       session[:user_id] = user.id
       session[:username] = user.name
-
-      if session[:user_id]
-        @user = User.find(session[:user_id])
-        @progress = @user.progress
-        if @progress.nil?
-          @progress = Progress.create(user_id: @user.id, points: 0, correct_answers: 0, incorrect_answers: 0)
-        end
-      end
-
-
-      redirect '/menu' # Redirige a la página de inicio después del inicio de sesión exitoso
     else
-      # Credenciales inválidas, muestra un mensaje de error
       flash[:error] = 'Nombre de usuario o contraseña incorrectos'
       redirect '/noRegistrado' # Redirige de nuevo al formulario de inicio de sesión
+      return
     end
+    @user = User.find(session[:user_id])
+    @progress = @user.progress || Progress.create(user_id: @user.id, points: 0, correct_answers: 0, incorrect_answers: 0)
+    redirect '/menu' # Redirige a la página de inicio después del inicio de sesión exitoso
   end
 
 
