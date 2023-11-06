@@ -82,16 +82,14 @@ class User < ActiveRecord::Base
   end
 
   def generate_card(name, position, price, available)
-    Card.create(name: name, position: position, price: price, available: available)
+    Card.create(name:, position:, price:, available:)
   end
-
 
   def buy_card(card_number)
     card_name = JUGADORES[card_number]
-    if cards.where(name: card_name, user_id: id).count.positive?
-      return false
-    end
+    return false if cards.where(name: card_name, user_id: id).count.positive?
     return false unless self.coins >= 10
+
     card = generate_card(card_name, 'Posición', 10, true)
     self.coins -= 10
     card.update(available: false, user_id: id)
@@ -102,13 +100,13 @@ class User < ActiveRecord::Base
   def set_card_by_name
     position = JUGADORES.key(card)
     new_card_name = "carta#{position}" if position
-  
-    if new_card_name && self.card != new_card_name
-      self.card = new_card_name
-      save
-    end
+
+    return unless new_card_name && card != new_card_name
+
+    self.card = new_card_name
+    save
   end
-  
+
   def card_image_url
     "/image/#{card}.jpg"
   end

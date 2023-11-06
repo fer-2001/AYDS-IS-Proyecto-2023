@@ -18,7 +18,7 @@ class Progress < ActiveRecord::Base
     save!
   end
 
-  def create_user(user_id)
+  def create_user(_user_id)
     @progress = Progress.create(user_id: @user.id, points: 0, correct_answers: 0, incorrect_answers: 0)
   end
 end
