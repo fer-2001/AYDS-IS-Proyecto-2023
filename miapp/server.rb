@@ -8,6 +8,7 @@ require 'sinatra/flash'
 require 'rack/session/cookie'
 
 require 'sinatra/reloader' if Sinatra::Base.environment == :development
+require './controllers/user_controller'
 
 require_relative 'models/user'
 require_relative 'models/report'
@@ -20,9 +21,12 @@ require_relative 'models/card'
 
 
 class App < Sinatra::Application
+  use UserController
+
   def initialize(_app = nil)
     super()
   end
+
 
   use Rack::Session::Cookie,
       key: 'my_app_session',
@@ -64,18 +68,12 @@ class App < Sinatra::Application
     erb :index
   end
 
-  get '/users' do
-    erb :users
-  end
 
   get '/reports' do
     @reports = Report.all
     erb :reports
   end
 
-  get '/register' do
-    erb :register
-  end
 
   post '/reports' do
     session[:user_id]
@@ -94,33 +92,6 @@ class App < Sinatra::Application
     @suggestion = Suggestion.find_or_create_by(user_id: params[:user_id], description: params[:description],
                                                date: params[:date])
     erb :suggestion
-  end
-
-  post '/users' do
-    username = params[:username]
-    password = params[:password]
-    user = User.find_by(name: username)
-    if user&.authenticate(password)
-      session[:user_id] = user.id
-      session[:username] = user.name
-    else
-      flash[:error] = 'Nombre de usuario o contraseña incorrectos'
-      redirect '/noRegistrado' # Redirige de nuevo al formulario de inicio de sesión
-      return
-    end
-    @user = User.find(session[:user_id])
-    @progress = @user.progress || Progress.create(user_id: @user.id, points: 0, correct_answers: 0, incorrect_answers: 0)
-    redirect '/menu' # Redirige a la página de inicio después del inicio de sesión exitoso
-  end
-
-
-  get '/noRegistrado' do
-    erb :noRegistrado
-  end
-
-  post '/logout' do
-    session.clear
-    redirect '/'
   end
 
 
@@ -142,29 +113,6 @@ class App < Sinatra::Application
 
 
 
-  post '/register' do
-    name = params[:name]
-
-    if User.exists?(name:)
-      @user_exists = true
-      erb :register
-    else
-      @user = User.new(name:, password: params[:pass])
-      if @user.save
-        flash[:success] = 'Usuario registrado exitosamente'
-        redirect '/users'
-      else
-        flash[:error] = 'Error al registrar el usuario'
-        redirect '/register'
-      end
-    end
-  end
-
-
-
-  get '/register' do
-    erb :register
-  end
 
 
   get '/menu' do
