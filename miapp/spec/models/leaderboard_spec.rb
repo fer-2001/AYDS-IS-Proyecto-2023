@@ -15,10 +15,10 @@ RSpec.describe Leaderboard do
     expect(lb.valid?).to eq(false)
   end
 
-  it "should have a user association" do
+  it 'should have a user association' do
     leaderboard = Leaderboard.create
     user = User.create
-    leaderboard.update(user: user)
+    leaderboard.update(user:)
     expect(leaderboard.user).to eq(user)
   end
 

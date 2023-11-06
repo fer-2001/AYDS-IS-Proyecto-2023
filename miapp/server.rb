@@ -8,6 +8,7 @@ require 'sinatra/flash'
 require 'rack/session/cookie'
 
 require 'sinatra/reloader' if Sinatra::Base.environment == :development
+require './controllers/user_controller'
 
 require_relative 'models/user'
 require_relative 'models/report'
@@ -20,9 +21,12 @@ require_relative 'models/card'
 
 
 class App < Sinatra::Application
+  use UserController
+
   def initialize(_app = nil)
     super()
   end
+
 
   use Rack::Session::Cookie,
       key: 'my_app_session',
@@ -64,18 +68,12 @@ class App < Sinatra::Application
     erb :index
   end
 
-  get '/users' do
-    erb :users
-  end
 
   get '/reports' do
     @reports = Report.all
     erb :reports
   end
 
-  get '/register' do
-    erb :register
-  end
 
   post '/reports' do
     session[:user_id]
@@ -94,33 +92,6 @@ class App < Sinatra::Application
     @suggestion = Suggestion.find_or_create_by(user_id: params[:user_id], description: params[:description],
                                                date: params[:date])
     erb :suggestion
-  end
-
-  post '/users' do
-    username = params[:username]
-    password = params[:password]
-    user = User.find_by(name: username)
-    if user&.authenticate(password)
-      session[:user_id] = user.id
-      session[:username] = user.name
-    else
-      flash[:error] = 'Nombre de usuario o contraseña incorrectos'
-      redirect '/noRegistrado' # Redirige de nuevo al formulario de inicio de sesión
-      return
-    end
-    @user = User.find(session[:user_id])
-    @progress = @user.progress || Progress.create(user_id: @user.id, points: 0, correct_answers: 0, incorrect_answers: 0)
-    redirect '/menu' # Redirige a la página de inicio después del inicio de sesión exitoso
-  end
-
-
-  get '/noRegistrado' do
-    erb :noRegistrado
-  end
-
-  post '/logout' do
-    session.clear
-    redirect '/'
   end
 
 
@@ -142,29 +113,6 @@ class App < Sinatra::Application
 
 
 
-  post '/register' do
-    name = params[:name]
-
-    if User.exists?(name:)
-      @user_exists = true
-      erb :register
-    else
-      @user = User.new(name:, password: params[:pass])
-      if @user.save
-        flash[:success] = 'Usuario registrado exitosamente'
-        redirect '/users'
-      else
-        flash[:error] = 'Error al registrar el usuario'
-        redirect '/register'
-      end
-    end
-  end
-
-
-
-  get '/register' do
-    erb :register
-  end
 
 
   get '/menu' do
@@ -205,69 +153,13 @@ class App < Sinatra::Application
   post '/responses' do
     request_body = JSON.parse(request.body.read)
 
-    option_id = request_body['option_id']
-    user_id = request_body['user_id']
+    status, response_data = Response.handle_response(request_body)
 
-    # Verificar si la opción y el usuario existen
-    option = Option.find(option_id)
-    user = User.find_by(id: user_id)
-    unless option && user
-      status 404
-      return 'Opción o usuario no encontrados'
-    end
-
-    # Verificar si el usuario ya ha respondido esa pregunta
-    response = Response.find_by(user_id:, option_id:)
-    if response
-      new_question = Question.where.not(id: @questions.map(&:id)).sample
-      # Serializar la nueva pregunta y enviarla como respuesta al cliente
-      content_type :json
-      { question: new_question }.to_json
-      # Obtener la pregunta y la respuesta seleccionada
-      question = option.question
-      selected_option = Option.find_by(id: option_id)
-
-      # Obtener la respuesta correcta
-      correct_option = question.options.find_by(correct: true)
-
-      # Obtener las curiosidades de la pregunta
-      curiosities = question.curiosities
-
-      # Renderizar el erb con la curiosidad y la respuesta
-      erb :curiosities,
-          locals: { question:, selected_option:, correct_option:, curiosities: }
-
-    else
-      # Crear la respuesta y asociarla al usuario y la opción
-      is_correct = option.correct
-      Response.create(user_id:, option_id:)
-
-
-      progress = Progress.find_by(user_id:)
-      if progress.nil?
-        # Si no se encontró ningún progreso para el usuario, puedes crear uno nuevo
-        progress = Progress.create(user_id:)
-      end
-      # Obtener el progreso del usuario
-      if progress
-
-        is_correct = option.correct
-        Response.create(user_id:, option_id:)
-
-        progress = Progress.find_or_create_by(user_id:)
-
-        progress.update_progress(option, is_correct)
-        user.update_fields(option)
-        user.update_role
-      end
-
-      if is_correct
-        '¡Respuesta correcta!'
-      else
-        'Respuesta incorrecta'
-      end
-    end
+    status status
+    content_type :json
+    response_data
   end
+
 
   get '/leaderboard' do
     @datos = User.order(points: :desc).limit(5)

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Migration of CreateResponses
 class CreateResponses < ActiveRecord::Migration[7.0]
   def change
     create_table :responses, id: false do |t|

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Class Leaderboard
 class Leaderboard < ActiveRecord::Base
   belongs_to :user
   validates :rank, presence: true
