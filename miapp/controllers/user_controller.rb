@@ -1,4 +1,3 @@
-
 class UserController < Sinatra::Application
   set :views, File.expand_path('../views', __dir__)
 
@@ -19,7 +18,8 @@ class UserController < Sinatra::Application
       return
     end
     @user = User.find(session[:user_id])
-    @progress = @user.progress || Progress.create(user_id: @user.id, points: 0, correct_answers: 0, incorrect_answers: 0)
+    @progress = @user.progress || Progress.create(user_id: @user.id, points: 0, correct_answers: 0,
+                                                  incorrect_answers: 0)
     redirect '/menu' # Redirige a la página de inicio después del inicio de sesión exitoso
   end
 
@@ -32,7 +32,7 @@ class UserController < Sinatra::Application
     redirect '/'
   end
 
-  
+
   post '/register' do
     name = params[:name]
 
