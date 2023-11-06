@@ -17,4 +17,8 @@ class Progress < ActiveRecord::Base
     self.current_question += 1
     save!
   end
+
+  def create_user(user_id)
+    @progress = Progress.create(user_id: @user.id, points: 0, correct_answers: 0, incorrect_answers: 0)
+  end
 end
