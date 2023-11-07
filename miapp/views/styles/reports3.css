@@ -113,9 +113,14 @@ body::after {
   left: 10px;
 }
 
-.btn-back button {
+.btn-back {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
+
+.btn-back a {
   display: inline-block;
-  text-decoration: none;
   padding: 10px 20px;
   background-color: hsl(0, 0%, 0%);
   color: hsl(0, 0%, 100%);
@@ -125,12 +130,7 @@ body::after {
   transition: background-color 0.3s ease;
 }
 
-.btn-back button:hover {
+.btn-back a:hover {
   background-color: #ffb620;
-}
-
-
-.btn-back button a {
-  color: inherit;
-  text-decoration: none;
+  cursor: pointer; 
 }

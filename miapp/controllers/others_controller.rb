@@ -1,5 +1,6 @@
 class OthersController < Sinatra::Application
   set :public_folder, File.expand_path('../views', __dir__)
+  set :views, File.expand_path('../views', __dir__)
 
 
   get '/reports' do
