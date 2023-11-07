@@ -1,7 +1,8 @@
 require 'sinatra/reloader' if Sinatra::Base.environment == :development
 
 class StoreController < Sinatra::Application
-  set :views, File.expand_path('../views', __dir__)
+  set :public_folder, File.expand_path('../views', __dir__)
+
 
   get '/store' do
     @user = User.find(session[:user_id])

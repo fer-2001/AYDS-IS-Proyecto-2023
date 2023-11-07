@@ -1,5 +1,6 @@
 class GameController < Sinatra::Application
-  set :views, File.expand_path('../views', __dir__)
+  set :public_folder, File.expand_path('../views', __dir__)
+
 
   before do
     # Verifica si el usuario ha iniciado sesión antes de permitir el acceso a todas las rutas excepto /login
