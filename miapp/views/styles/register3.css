@@ -93,6 +93,7 @@ button:hover {
   text-align: center;
   transition: background-color 0.3s ease;
   border-radius: 5px; 
+  border: 2px solid black; 
   margin-top: 10px;
   font-size: 18px;
 
