@@ -29,37 +29,40 @@ body::after {
   height: 100%;
   z-index: -1;
 }
-.content {
-  padding: 20px; 
-}
-  
-  .container {
-    position: center;
-    width: 400px;
-    height: 500px;
-    margin-left: 100px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
 
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
+.container {
+  position: relative;
+  width: 400px;
+  height: 500px;
+  margin-left: 100px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+  padding: 20px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
   
   h1 {
     font-family: 'FutbolFont', Arial, sans-serif;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: bold;
     color: #000000;
     text-align: center;
     text-transform: uppercase;
-    margin-bottom: 150px;
+    margin-bottom: 50px;
   }
   
   @font-face {
@@ -68,7 +71,7 @@ body::after {
   }
   
   input {
-    margin-bottom: 200px;
+    margin-bottom: 100px;
     width: 200px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -132,5 +135,5 @@ body::after {
 
 .btn-back a:hover {
   background-color: #ffb620;
-  cursor: pointer;
+  cursor: pointer; 
 }
