@@ -7,15 +7,17 @@
 </head>
 <body>
     <div class="container">
-        <form action="/suggestion" method="POST">
-            <h1> Sugerencias </h1>
-            <p> Gracias por contribuir con tu sugerencia!</p>
-            <input type="text" required name="description" placeholder="Sugerencia">
-            <input type="hidden" name="user_id" value="<%= session[:user_id] %>">
-            <div class="btn-container">
-                <button>Enviar</button>
-            </div>
-        </form>
+        <div class="content">
+            <form action="/suggestion" method="POST">
+                <h1> Sugerencias </h1>
+                <p> Gracias por contribuir con tu sugerencia!</p>
+                <input type="text" required name="description" placeholder="Sugerencia">
+                <input type="hidden" name="user_id" value="<%= session[:user_id] %>">
+                <div class="btn-container">
+                    <button>Enviar</button>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="btn-back">
         <a href="/menu">Volver</a>

@@ -4,54 +4,10 @@
   <link rel="icon" href="/image/icon.png"/>
   <link rel="stylesheet" href="/styles/question.css"/>
   <title>ADT</title>
-  <style>
-    /* Estilos para el cartel de la curiosidad y los mensajes de respuesta */
-    .curiosity-popup {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 300px;
-      height: 200px;
-      background-color: rgba(0, 0, 0, 0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .curiosity-content {
-      background-color: #FFFFFF;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .correct {
-      color: #FFFFFF;
-      background-color: #75AADB;
-      font-weight: bold;
-      border-radius: 10px;
-      animation: mensajeAnimacion 2s ease-in-out;
-      margin-bottom: 40px;
-    }
-
-    .incorrect {
-      color: #FFFFFF;
-      background-color: #9F2232;
-      font-weight: bold;
-      border-radius: 10px;
-      animation: mensajeAnimacion 2s ease-in-out;
-      margin-bottom: 40px;
-    }
-
-    @keyframes mensajeAnimacion {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-  </style>
 </head>
 <body>
+  <div id="blur-background"></div>
+  <div id="background-container"></div>
   <div class="container">
     <% pregunta_actual = session[:current_question] || @user.progress.current_question || 0 %>
     <% totalPreguntas = @questions.length %>
@@ -205,8 +161,6 @@
         }
       });
     }
-
-    
 
     function regresarMenu() {
         window.location.href = '/menu';
