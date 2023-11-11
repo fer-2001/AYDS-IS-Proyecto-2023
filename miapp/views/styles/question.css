@@ -15,7 +15,7 @@ body {
   height: 100%;
   background: url("/image/arco.jpg") center/cover fixed no-repeat;
   filter: blur(4px);
-  z-index: -1; /* Coloca el fondo detrás del contenido principal */
+  z-index: -1; 
 }
 
 #background-container {
@@ -192,11 +192,10 @@ body {
 }
 
 
-/* Estilos para el encabezado h2 */
 .curiosity-popup .curiosity-content h2 {
-  color: #000000; /* Color del texto del encabezado */
-  font-size: 24px; /* Tamaño de fuente del encabezado */
-  margin-bottom: 15px; /* Margen inferior del encabezado */
+  color: #000000; 
+  font-size: 24px;
+  margin-bottom: 15px; 
   font-family: 'FutbolFont', Arial, sans-serif;
   font-weight: bold;
   text-align: center;
