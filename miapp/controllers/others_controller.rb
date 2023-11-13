@@ -1,13 +1,18 @@
+# frozen_string_literal: true
+
+# OthersController
+#
+# Controller class responsible for handling various routes related to reports, suggestions,
+# and leaderboard in the Sinatra application.
+#
 class OthersController < Sinatra::Application
   set :public_folder, File.expand_path('../views', __dir__)
   set :views, File.expand_path('../views', __dir__)
-
 
   get '/reports' do
     @reports = Report.all
     erb :reports
   end
-
 
   post '/reports' do
     session[:user_id]
@@ -19,7 +24,6 @@ class OthersController < Sinatra::Application
   get '/suggestion' do
     erb :suggestion
   end
-
 
   post '/suggestion' do
     session[:user_id]

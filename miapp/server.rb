@@ -22,7 +22,6 @@ require_relative 'models/option'
 require_relative 'models/response'
 require_relative 'models/card'
 
-
 class App < Sinatra::Application
   use UserController
   use GameController
@@ -32,7 +31,6 @@ class App < Sinatra::Application
   def initialize(_app = nil)
     super()
   end
-
 
   use Rack::Session::Cookie,
       key: 'my_app_session',

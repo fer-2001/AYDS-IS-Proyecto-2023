@@ -48,7 +48,6 @@ class Response < ActiveRecord::Base
 
       return [200, '¡Respuesta correcta!'] if is_correct
 
-
       [200, 'Respuesta incorrecta']
 
     end

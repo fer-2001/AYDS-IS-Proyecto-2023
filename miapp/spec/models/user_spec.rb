@@ -5,7 +5,6 @@ require_relative '../../models/init'
 require_relative '../../models/option'
 require_relative '../../models/question'
 
-
 describe User do
   describe 'valid' do
     describe 'when there is no name' do
@@ -57,7 +56,6 @@ describe User do
         expect(u.errors[:name]).to include("can't be blank")
       end
     end
-
 
     describe 'when lifes equal 0' do
       it 'should be valid' do

@@ -4,7 +4,6 @@ require 'sinatra/activerecord'
 require_relative '../../models/user'
 require_relative '../../models/leaderboard'
 
-
 RSpec.describe Leaderboard do
   it 'belong_to leaderboard_user' do
     association = described_class.reflect_on_association(:user)
@@ -21,7 +20,6 @@ RSpec.describe Leaderboard do
     leaderboard.update(user:)
     expect(leaderboard.user).to eq(user)
   end
-
 
   it 'should place the user with the most points in the first position of the rank' do
     u1 = User.create(name: 'Mario', password: 'M3', points: 15)

@@ -5,7 +5,6 @@ require_relative '../../models/option'
 require_relative '../../models/question'
 require_relative '../../models/user'
 
-
 describe Option do
   it 'has_many option_responses' do
     association = described_class.reflect_on_association(:responses)
@@ -17,12 +16,10 @@ describe Option do
     expect(association.macro).to eq(:has_many)
   end
 
-
   it 'belong_to option_questions' do
     association = described_class.reflect_on_association(:question)
     expect(association.macro).to eq(:belongs_to)
   end
-
 
   it 'is not valid empty option' do
     op = Option.new
