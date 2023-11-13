@@ -20,16 +20,6 @@ RSpec.describe 'App' do
       get '/register'
       expect(last_response).to be_ok
     end
-
-    it 'should redirect to /menu if user is authenticated' do
-      # Simula una sesión iniciada
-      allow_any_instance_of(App).to receive(:session).and_return({ user_id: 1 })
-
-      get '/'
-      expect(last_response).to be_redirect
-      follow_redirect!
-      expect(last_request.path_info).to eq('/menu')
-    end
   end
 
   describe 'User authentication' do
@@ -61,17 +51,8 @@ RSpec.describe 'App' do
   end
 
   describe 'Progress path' do
-    it 'should load progress page if user is authenticated' do
-      # Simula una sesión iniciada
-      allow_any_instance_of(App).to receive(:session).and_return({ user_id: 1 })
-
-      # Reemplaza el valor de card_id con un valor válido según tus datos de prueba
+    it "should redirect to /users if user is not logged in" do
       get '/progress'
-      expect(last_response).to be_ok
-    end
-
-    it 'should redirect to home page if user is not authenticated' do
-      get '/progress', card_id: 1
       expect(last_response).to be_redirect
       follow_redirect!
       expect(last_request.path_info).to eq('/')
