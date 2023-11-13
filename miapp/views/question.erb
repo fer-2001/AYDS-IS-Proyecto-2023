@@ -35,7 +35,8 @@
             <button class="btn" onclick="mostrarCuriosidad('<%= @questions[index - 1].curiosities %>')">Mostrar Curiosidad</button>
           <% end %>
           <button class="btn" id="nextButton" type="button" onclick="enviarFormulario()">Siguiente pregunta</button>
-          <button class="btn" id="menuButton" type="button" onclick="regresarMenu()">Volver al Menú</button>
+          <button class="btn btn-menu" id="menuButton" type="button" onclick="regresarMenu()">Volver al Menú</button>
+
         </div>
       </div>
     <% end %>
@@ -79,7 +80,10 @@
 
         // Deshabilita todos los radio buttons en esta pregunta
         $('#question' + preguntaIndex + ' input[type="radio"]').attr('disabled', 'disabled');
-        $('#menuButton').prop('disabled', true);
+
+        // Habilita el botón del menú
+        $('.btn-menu').prop('disabled', true);
+
 
         var respuestaElemento = $('#question' + preguntaIndex + ' .question-response');
         respuestaElemento.text(correct ? 'Respuesta correcta' : 'Respuesta incorrecta');
@@ -118,6 +122,8 @@
 
       var optionId = $('input[name="option"]:checked').val();
       var userId = $('input[name="user_id"]').val();
+
+      $('.btn-menu').prop('disabled', false);
 
       $.ajax({
         url: '/responses',
