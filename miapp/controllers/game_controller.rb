@@ -1,7 +1,13 @@
+# frozen_string_literal: true
+
+# GameController
+#
+# Controller class responsible for managing routes related to the game, user progress, questions,
+# and responses in the Sinatra application.
+#
 class GameController < Sinatra::Application
   set :public_folder, File.expand_path('../views', __dir__)
   set :views, File.expand_path('../views', __dir__)
-
 
   before do
     # Verifica si el usuario ha iniciado sesión antes de permitir el acceso a todas las rutas excepto /login
@@ -30,7 +36,6 @@ class GameController < Sinatra::Application
       redirect '/users'
     end
   end
-
 
   get '/menu' do
     @user = User.find(session[:user_id])
@@ -65,7 +70,6 @@ class GameController < Sinatra::Application
   get '/lifes' do
     erb :lifes
   end
-
 
   post '/responses' do
     request_body = JSON.parse(request.body.read)

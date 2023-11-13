@@ -1,3 +1,10 @@
+# frozen_string_literal: true
+
+# UserController
+#
+# Controller class responsible for handling user-related routes and actions in the Sinatra application.
+# Manages user authentication, registration, and session handling.
+#
 class UserController < Sinatra::Application
   set :public_folder, File.expand_path('../views', __dir__)
   set :views, File.expand_path('../views', __dir__)
@@ -32,7 +39,6 @@ class UserController < Sinatra::Application
     session.clear
     redirect '/'
   end
-
 
   post '/register' do
     name = params[:name]

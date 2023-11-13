@@ -1,9 +1,14 @@
+# frozen_string_literal: true
+
 require 'sinatra/reloader' if Sinatra::Base.environment == :development
 
+# StoreController
+#
+# Controller class responsible for managing routes related to the store, card purchases, and card usage
+# in the Sinatra application.
 class StoreController < Sinatra::Application
   set :public_folder, File.expand_path('../views', __dir__)
   set :views, File.expand_path('../views', __dir__)
-
 
   get '/store' do
     @user = User.find(session[:user_id])
@@ -26,7 +31,6 @@ class StoreController < Sinatra::Application
     @user = User.find(session[:user_id])
     erb :cards
   end
-
 
   # Ruta para comprar una carta
   post '/buy_card/:card_id' do
