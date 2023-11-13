@@ -3,6 +3,7 @@
 require 'rack/test'
 require_relative '../../server'
 
+
 RSpec.describe 'App' do
   include Rack::Test::Methods
 
@@ -58,4 +59,27 @@ RSpec.describe 'App' do
       expect(last_request.path_info).to eq('/')
     end
   end
+
+
+  describe 'User registration' do
+    context 'with valid parameters' do
+      # A new user is created in each execution to avoid having to manipulate the data in the database
+      timestamp = Time.now.to_s
+      let(:user_name) { 'Test'+timestamp }
+      it 'should register the user and redirect to /users' do
+        post '/register', name: user_name, pass: 'L1'  
+        follow_redirect!
+        expect(last_request.path_info).to eq('/users')
+      end
+    end
+  
+    context 'with invalid parameters' do
+      it 'should show an error message and stay on the /register page' do
+        post '/register', name: 'Juan', pass: 'J'
+        expect(last_response).not_to be_redirect
+      end
+    end
+  end
+  
+  
 end
