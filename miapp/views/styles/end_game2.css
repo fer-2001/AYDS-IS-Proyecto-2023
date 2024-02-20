@@ -11,14 +11,15 @@ body {
   }
   
   .animate-charcter {
+    font-family: 'FutbolFont', Arial, sans-serif;
     text-transform: uppercase;
     text-align: center;
     background-image: linear-gradient(
       -225deg,
-      #93beff 0%,
+      #25a2c2 0%,
       #6dc8df 29%,
       #5da6f4 67%,
-      #fff800 100%
+      #ffb620 100%
     );
     background-size: auto auto;
     background-clip: border-box;
@@ -33,6 +34,11 @@ body {
     font-size: 50px;
   }
   
+  @font-face {
+    font-family: 'FutbolFont';
+    src: url('/image/Sports World-Regular.ttf') format('truetype');   
+  }
+
   @keyframes textclip {
     to {
       background-position: 200% center;
@@ -65,8 +71,8 @@ body {
   .btn-container button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: hsl(180, 39%, 49%);
-    color: hsl(0, 0%, 0%);
+    background-color: hsl(0, 0%, 0%);
+    color: hsl(0, 0%, 100%);
     font-size: 18px;
     text-decoration: none;
     border-radius: 5px;
@@ -78,7 +84,7 @@ body {
   }
   
   .btn-container button:hover {
-    background-color: #45a049;
+    background-color: #ffb620;
   }
   
   h1, p {

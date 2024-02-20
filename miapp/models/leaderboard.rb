@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
+# Class Leaderboard
 class Leaderboard < ActiveRecord::Base
   belongs_to :user
-  validates :rank, presence: true  
+  validates :rank, presence: true
   def self.update_rank
     # Recuperar todos los usuarios ordenados por puntos de forma descendente
     users_ordered_by_points = User.order(points: :desc)

@@ -59,7 +59,7 @@
   }
   
   .use-card-button {
-    background-color: #007bff;
+    background-color: #000000;
     color: #fff;
     border: none;
     padding: 5px 10px;
@@ -69,7 +69,7 @@
   }
   
   .use-card-button:hover {
-    background-color: #0056b3;
+    background-color: #ffb620;
     border-radius: 10px;
   }
   
@@ -78,12 +78,33 @@
     margin-top: 20px;
   }
   
+  .menu-button:hover {
+    background-color: #ffb620;
+    border-radius: 10px;
+  }
+
   .menu-button {
     display: inline-block;
-    background-color: #007bff;
+    background-color: #000000;
     color: #fff;
     border: none;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 10px;
+    transition: background-color 0.3s ease; 
   }
+
+  h1 {
+    font-family: 'FutbolFont', Arial, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  @font-face {
+    font-family: 'FutbolFont';
+    src: url('/image/Sports World-Regular.ttf') format('truetype');   
+  }
+  
